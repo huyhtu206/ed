@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hướng Dẫn Từng Bước WordPress</title>
+
+    <!-- Google Fonts: Be Vietnam Pro (hỗ trợ tiếng Việt) & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- QRCode Generator Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- HTML5 QRCode Scanning Library -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <style>
+        :root {
+            --bg: #F2F0E8;
+            --bg-off: #E8E6DC;
+            --bg-dk: #1A1916;
+            --teal: #0F6E56;
+            --teal-lt: #5DCAA5;
+            --ink: #1C1917;
+            --ink-2: #5F5E5A;
+            --ink-3: #888780;
+            --b1: rgba(28, 25, 23, .09);
+            --b2: rgba(28, 25, 23, .16);
+            --sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--ink);
+            font-size: 15px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Responsive Desktop warning */
+        .desktop-msg {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .desktop-msg {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background: var(--bg-dk);
+                color: var(--bg);
+                text-align: center;
+                padding: 2rem 2rem;
+                position: relative;
+                overflow: hidden;
+                gap: 0;
+            }
+
+            /* Faint decorative background grid similar to huynhtu.com */
+            .desktop-msg::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: linear-gradient(rgba(93, 202, 165, .02) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(93, 202, 165, .02) 1px, transparent 1px);
+                background-size: 40px 40px;
+                pointer-events: none;
+            }
+
+            .desktop-qr-container {
+                display: flex;
+                gap: 2.5rem;
+                margin-bottom: 1.5rem;
+                z-index: 1;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .desktop-qr-box {
+                background: #fff;
+                padding: 1.25rem;
+                border-radius: 16px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: transform 0.25s ease;
+            }
+
+            .desktop-qr-box:hover {
+                transform: translateY(-5px);
+            }
+
+            .desktop-qr-box span {
+                font-family: var(--mono);
+                font-size: 0.72rem;
+                color: var(--ink);
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .desktop-msg h2 {
+                font-size: 1.6rem;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                margin-bottom: 0.4rem;
+                z-index: 1;
+            }
+
+            .desktop-msg p {
+                font-size: 1rem;
+                color: var(--ink-3);
+                max-width: 50ch;
+                margin-bottom: 1.5rem;
+                z-index: 1;
+            }
+
+            .btn-download {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 14px 32px;
+                background: var(--teal);
+                color: #fff;
+                font-size: 0.95rem;
+                font-weight: 600;
+                border-radius: 10px;
+                text-decoration: none;
+                transition: all 0.2s;
+                z-index: 1;
+                box-shadow: 0 4px 12px rgba(15, 110, 86, 0.25);
+            }
+
+            .btn-download:hover {
+                background: var(--teal-lt);
+                color: var(--ink);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(93, 202, 165, 0.35);
+            }
+
+            .app {
+                display: none !important;
+            }
+        }
+
+        .app {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+            border-left: 1px solid var(--b1);
+            border-right: 1px solid var(--b1);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            flex: 1;
+            padding: 12px 20px 0;
+            animation: fadein 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-label {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--ink);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .sep {
+            border: none;
+            border-top: 1px solid var(--b1);
+            margin: 20px 0;
+        }
+
+        /* Clean aligned list style (removing original hyphens) */
+        ul.bullets {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.bullets li {
+            position: relative;
+            padding-left: 0;
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: var(--ink);
+            text-align: left;
+        }
+
+        /* Fully disable any prefix dots or characters */
+        ul.bullets li::before {
+            display: none !important;
+        }
+
+        ul.bullets li strong {
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        /* Notices */
+        .notice {
+            background: var(--bg-off);
+            border-left: 4px solid var(--ink-3);
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: var(--ink-2);
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .notice.warn {
+            border-color: #f0ad4e;
+            background: #fffcf5;
+            color: #7a5c00;
+        }
+
+        .notice.ok {
+            border-color: var(--teal);
+            background: #f1f7f5;
+            color: #0d5c48;
+        }
+
+        .notice.red {
+            border-color: #e55;
+            background: #fff8f8;
+            color: #900;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 12.5px;
+            background: var(--bg-off);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--ink);
+        }
+
+        .code-block {
+            background: var(--bg-off);
+            border: 1px solid var(--b1);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-family: var(--mono);
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--ink);
+            margin: 16px auto;
+            width: 100%;
+            white-space: pre-line;
+            word-break: break-all;
+        }
+
+        /* Step image */
+        .step-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 18px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(28, 25, 23, 0.08);
+            border: 1px solid var(--b1);
+        }
+
+        /* Branch buttons */
+        .branch-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 25px;
+        }
+
+        .btn-branch {
+            padding: 20px;
+            border: 1.5px solid var(--b2);
+            border-radius: 12px;
+            background: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            color: var(--ink);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .btn-branch span {
+            display: block;
+            font-size: 13px;
+            color: var(--ink-2);
+            font-weight: 400;
+            margin-top: 5px;
+        }
+
+        .btn-branch.selected {
+            border-color: var(--teal);
+            background: #f1f7f5;
+            box-shadow: 0 0 0 1px var(--teal);
+        }
+
+        .part-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 20px 0 6px;
+        }
+
+        /* Premium Youtube Video Cards */
+        .video-card {
+            display: block;
+            text-decoration: none;
+            border-radius: 14px;
+            overflow: hidden;
+            margin: 18px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            background: var(--ink);
+            -webkit-tap-highlight-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .video-thumb-wrap {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-thumb-wrap img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .video-card:hover .video-thumb-wrap img {
+            transform: scale(1.03);
+        }
+
+        .video-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .video-play-btn {
+            width: 52px;
+            height: 52px;
+            background: var(--teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(15, 110, 86, 0.45);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .video-card:hover .video-play-btn {
+            transform: scale(1.1);
+            background: var(--teal-lt);
+            color: var(--ink);
+        }
+
+        .video-card-meta {
+            background: var(--ink);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .yt-logo {
+            font-size: 18px;
+            color: #ff0000;
+            flex-shrink: 0;
+        }
+
+        .video-card-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            overflow: hidden;
+        }
+
+        .video-card-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .video-card-sub {
+            font-size: 11px;
+            color: var(--ink-3);
+        }
+
+        /* Nav controls */
+        .nav-btns {
+            display: flex;
+            gap: 12px;
+            padding: 16px 20px;
+            margin-top: auto;
+            border-top: 1px solid var(--b1);
+            background: var(--bg);
+            position: sticky;
+            bottom: 0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 13px;
+            border: 1.5px solid var(--b2);
+            border-radius: 10px;
+            background: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            color: var(--ink);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            background: var(--bg-off);
+        }
+
+        .btn.primary {
+            background: var(--ink);
+            color: var(--bg);
+            border-color: var(--ink);
+        }
+
+        .btn.primary:active {
+            background: var(--ink-2);
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Interactive QR Scanner UI inside mobile app */
+        .qr-unlock-wrapper {
+            background: #fff;
+            border: 1.5px solid var(--b2);
+            border-radius: 16px;
+            padding: 24px 20px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .qr-scanner-frame {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            border: 2px dashed var(--teal);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        /* Dynamic laser scanner animation line */
+        .scanner-laser {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--teal-lt);
+            box-shadow: 0 0 10px var(--teal-lt);
+            animation: scanning 2s linear infinite;
+        }
+
+        @keyframes scanning {
+            0% {
+                top: 0%;
+            }
+
+            50% {
+                top: 100%;
+            }
+
+            100% {
+                top: 0%;
+            }
+        }
+
+        .qr-unlock-wrapper h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .qr-unlock-wrapper p {
+            font-size: 13.5px;
+            color: var(--ink-2);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Live Camera Scanner Element */
+        .camera-reader-box {
+            display: none;
+            width: 100%;
+            max-width: 280px;
+            margin: 15px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid var(--ink);
+            background: #000;
+        }
+
+        .manual-unlock {
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid var(--b1);
+            text-align: left;
+        }
+
+        .manual-unlock span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink-2);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .manual-input-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .manual-input-row input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1.5px solid var(--b2);
+            border-radius: 8px;
+            font-family: var(--sans);
+            font-size: 14px;
+            color: var(--ink);
+            background: var(--bg);
+        }
+
+        .manual-input-row input:focus {
+            border-color: var(--teal);
+            outline: none;
+        }
+
+        .manual-input-row .btn {
+            flex: 0 0 90px;
+            padding: 8px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Desktop View: Displays single QR code above the Warning message -->
+    <div class="desktop-msg">
+        <div class="desktop-qr-container">
+            <div class="desktop-qr-box">
+                <div id="qrcode-desktop"></div>
+            </div>
+        </div>
+        <h2>Vui lòng mở trên điện thoại</h2>
+        <p>Tài liệu này chỉ hỗ trợ cho thiết bị di động.</p>
+        <a class="btn-download" href="index.html" download="HuongDan_WordPress.html">⬇ Tải file về máy</a>
+    </div>
+
+    <!-- Phone View: Mobile application -->
+    <div class="app">
+
+        <!-- Page 1: Khởi động XAMPP -->
+        <div class="page active" id="pg-1">
+            <div class="section-label">Khởi động XAMPP</div>
+            <ul class="bullets">
+                <li>Mở <strong>XAMPP Control Panel</strong></li>
+                <li>Click <strong>START</strong> cho Apache và MySQL (đèn xanh = OK)</li>
+            </ul>
+            <img class="step-img" src="xampp.png" alt="XAMPP Control Panel" loading="lazy">
+            <div class="notice warn">Nếu Apache lỗi port: Config → httpd-ssl.conf → thêm # trước <code>Listen 443</code>
+                thành
+                <code>#Listen 443</code>
+            </div>
+            <img class="step-img" src="ssl.png" alt="ssl" loading="lazy">
+            <ul class="bullets">
+                <li>Ctrl + S để <strong>Save</strong></li>
+            </ul>
+        </div>
+
+        <!-- Page 2: Cài Wordpress -->
+        <div class="page" id="pg-2">
+            <div class="section-label">Cài Wordpress</div>
+            <ul class="bullets">
+                <li>Truy cập <code>https://wordpress.org/download</code></li>
+                <li>Bấm <strong>Download Wordpress 7.0</strong> để tải về</li>
+                <img class="step-img" src="install.png" alt="install" loading="lazy">
+                <li>Chuột phải vào Wordpress chọn <strong>Extract here</strong></li>
+                <img class="step-img" src="zip.png" alt="zip" loading="lazy">
+                <li>Copy thư mục wordpress sau khi giải nén bỏ vào <code>C:\xampp\htdocs</code></li>
+                <img class="step-img" src="image.png" alt="image" loading="lazy">
+            </ul>
+        </div>
+
+        <!-- Page 3: Tạo Database -->
+        <div class="page" id="pg-3">
+            <div class="section-label">Tạo Database</div>
+            <ul class="bullets">
+                <li>Mở trình duyệt gõ <code>localhost/phpmyadmin</code></li>
+                <li>Bấm <strong>New</strong></li>
+                <li>Nhập tên database, ví dụ: <code>noithat</code>, chọn <strong>Create</strong></li>
+                <img class="step-img" src="data2.png" alt="data2" loading="lazy">
+            </ul>
+        </div>
+
+        <!-- Page 4: Cài đặt WordPress -->
+        <div class="page" id="pg-4">
+            <div class="section-label">Cài đặt WordPress</div>
+            <ul class="bullets">
+                <li>Truy cập <code>http://localhost/wordpress</code> → chọn ngôn ngữ</li>
+                <img class="step-img" src="w1.png" alt="install" loading="lazy">
+                <li>Bấm <strong>Continue</strong> sau đó bấm tiếp <strong>Let's go!</strong></li>
+                <li>Nhập thông tin database như sau:</li>
+                <div class="code-block">
+                    Database Name: <strong>noithat</strong>
+                    Username: root
+                    Password: (để trống)
+                    Host: localhost
+                    Table Prefix: wp_</div>
+                <img class="step-img" src="w2.png" alt="install" loading="lazy">
+                <li>Bấm <strong>Submit</strong> bấm <strong>Run the installation</strong></li>
+                <li>Nhập tên site, username, password admin, email</li>
+                <img class="step-img" src="w3.png" alt="install" loading="lazy">
+                <li>Bấm <strong>install Wordpress</strong> sau đó bấm Login</li>
+            </ul>
+            <div class="notice ok">Hoặc đăng nhập tại <code>http://localhost/wordpress/wp-admin</code></div>
+        </div>
+
+        <!-- Page 5: Cài đặt Theme & Plugin -->
+        <div class="page" id="pg-5">
+            <div class="section-label">Cài đặt Theme & Plugin</div>
+            <ul class="bullets">
+                <li>Ở trang quản trị chọn <strong>Appearance → Themes → Add New</strong></li>
+                <img class="step-img" src="addtheme.png" alt="add" loading="lazy">
+                <li>Nhấn <strong>Upload Theme</strong></li>
+                <li>Chọn <code>flatsome.zip</code> → Install Now → <strong>Activate</strong></li>
+                <img class="step-img" src="uptheme.png" alt="uptheme" loading="lazy">
+                <img class="step-img" src="activetheme.png" alt="active" loading="lazy">
+                <li>Bấm <strong>Let's go!</strong></li>
+                <img class="step-img" src="f1.png" alt="f1" loading="lazy">
+                <li>Bấm <strong>Continue</strong></li>
+                <img class="step-img" src="f2.png" alt="f2" loading="lazy">
+                <li>Bấm <strong>Create and Use Child Theme</strong></li>
+                <img class="step-img" src="f3.png" alt="f3" loading="lazy">
+                <li>Bấm <strong>Continue</strong> để cài Child Theme</li>
+                <img class="step-img" src="f4.png" alt="f4" loading="lazy">
+                <li>Bấm <strong>Continue</strong> để cài Plugin</li>
+                <img class="step-img" src="f5.png" alt="f5" loading="lazy">
+                <li>Bấm <strong>Continue</strong> để cài themes</li>
+                <img class="step-img" src="f6.png" alt="f6" loading="lazy">
+                <li>Bấm <strong>Continue</strong></li>
+                <img class="step-img" src="f7.png" alt="f7" loading="lazy">
+                <li>Bấm <strong>Agree and Continue</strong> → bấm tiếp <strong>View your new website!</strong></li>
+                <img class="step-img" src="f8.png" alt="f8" loading="lazy">
+            </ul>
+        </div>
+
+        <!-- Page 6: Cài themes theo yêu cầu -->
+        <div class="page" id="pg-6">
+            <div class="section-label">Cài themes theo yêu cầu</div>
+            <ul class="bullets">
+                <li>ở chế độ xem website → <strong>chọn Edit page</strong> → <strong>chọn Edit with UX Builder</strong>
+                </li>
+                <img class="step-img" src="e1.png" alt="e1" loading="lazy">
+                <li>Bấm vào bánh răng cột bên trái trên cùng cuộn xuống → chọn <strong>Clear Content...</strong></li>
+                <img class="step-img" src="e2.png" alt="e2" loading="lazy">
+                <li>Chọn themes theo đề yêu cầu: Nội thất → chọn <strong>Vendor Shop</strong> còn Bất động sản → chọn
+                    <strong>Mega Shop</strong>
+                </li>
+                <img class="step-img" src="e3.png" alt="e3" loading="lazy">
+            </ul>
+        </div>
+
+        <!-- Page 7: Chọn Chủ đề phân nhánh -->
+        <div class="page" id="pg-7">
+            <div class="section-label">Chủ đề</div>
+            <div class="branch-container">
+                <button class="btn-branch" id="opt-de1" onclick="selectBranch('de1')">
+                    Vendor Shop
+                    <span>Đề 1: Website Nội thất gia đình cao cấp</span>
+                </button>
+                <button class="btn-branch" id="opt-de2" onclick="selectBranch('de2')">
+                    Mega Shop
+                    <span>Đề 2: Sàn giao dịch Bất động sản</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Page 8-de1: Tạo Menu (Đề 1) -->
+        <div class="page" id="pg-8-de1" data-branch="de1" data-countdown="true">
+            <div class="section-label">Tạo Menu (Đề 1)</div>
+            <ul class="bullets">
+                <li>Product → Categories → <strong>Create Categories</strong></li>
+                <img class="step-img" src="D1.png" alt="D1" loading="lazy">
+                <li>Chọn Delete → nhấn <strong>Apply</strong> để xóa Categories cũ</li>
+                <img class="step-img" src="D2.png" alt="D2" loading="lazy">
+                <li>Điền thông tin để tạo Menu</li>
+                <img class="step-img" src="D3.png" alt="D3" loading="lazy">
+                <div class="code-block">
+                    Name: <strong>Là dựa theo tên danh mục bài thi</strong>
+                    slug: Custom hoặc để trống
+                    Parent category: (chọn vào danh mục cha hoặc để trống)
+                    Description: (thêm mô tả hoặc để trống)
+                    Display type: để trống
+                    Thumbnail: thêm ảnh liên quan danh mục</div>
+                <li>Sau khi nhập xong → bấm <strong>Add new catalogy</strong></li>
+                <img class="step-img" src="D4.png" alt="D4" loading="lazy">
+                <li>Lặp lại thao tác trên để tạo ra các danh mục theo yêu cầu</li>
+                <div class="notice red">Lưu ý chỉ có 5 danh mục chính thì cần ảnh gồm
+                    <code>Sofa, Bàn ăn, Giường, Dụng cụ nhà bếp, Đèn trang trí</code> các danh mục con còn lại không cần
+                    ảnh Thumbnail
+                </div>
+                <li>Cấu trúc đầy đủ</li>
+                <div class="code-block">
+                    ├── Sản phẩm (không có Thumbnail)
+                    │ ├── Sofa (Có Thumbnail)
+                    │ │ ├── Sofa góc (không có Thumbnail)
+                    │ │ ├── Ghế thư giãn (không có Thumbnail)
+                    │ │ ├── Ghế dài (không có Thumbnail)
+                    │ │ └── Bàn nước (không có Thumbnail)
+                    │ │
+                    │ ├── Bàn ăn (Có Thumbnail)
+                    │ │ ├── Bàn ăn 6 ghế (không có Thumbnail)
+                    │ │ ├── Ghế bàn ăn (không có Thumbnail)
+                    │ │ ├── Tủ ly (không có Thumbnail)
+                    │ │ └── Tủ bếp (không có Thumbnail)
+                    │ │
+                    │ ├── Giường (Có Thumbnail)
+                    │ │ ├── Giường đôi (không có Thumbnail)
+                    │ │ ├── Bàn trang điểm (không có Thumbnail)
+                    │ │ ├── Tủ áo (không có Thumbnail)
+                    │ │ └── Tủ đầu giường (không có Thumbnail)</div>
+            </ul>
+        </div>
+
+        <!-- Page 9-de1: Tạo Categories Product (Đề 1) -->
+        <div class="page" id="pg-9-de1" data-branch="de1" data-countdown="true" data-countdown-seconds="90">
+            <div class="section-label">Tạo Categories Product (Đề 1)</div>
+            <ul class="bullets">
+                <li>Product → Categories → <strong>Create Categories</strong></li>
+                <img class="step-img" src="D1.png" alt="D1" loading="lazy">
+                <li>Chọn Delete → nhấn <strong>Apply</strong> để xóa Categories cũ</li>
+                <img class="step-img" src="D2.png" alt="D2" loading="lazy">
+                <li>Điền thông tin để tạo Menu</li>
+                <img class="step-img" src="D3.png" alt="D3" loading="lazy">
+                <div class="code-block">
+                    Name: <strong>Là dựa theo tên danh mục bài thi</strong>
+                    slug: Custom hoặc để trống
+                    Parent category: (chọn vào danh mục cha hoặc để trống)
+                    Description: (thêm mô tả hoặc để trống)
+                    Display type: để trống
+                    Thumbnail: thêm ảnh liên quan danh mục</div>
+                <li>Sau khi nhập xong → bấm <strong>Add new catalogy</strong></li>
+                <img class="step-img" src="D4.png" alt="D4" loading="lazy">
+                <li>Lặp lại thao tác trên để tạo ra các danh mục theo yêu cầu</li>
+                <div class="notice red">Lưu ý chỉ có 5 danh mục chính thì cần ảnh gồm
+                    <code>Sofa, Bàn ăn, Giường, Dụng cụ nhà bếp, Đèn trang trí</code> các danh mục con còn lại không cần
+                    ảnh Thumbnail
+                </div>
+                <li>Cấu trúc đầy đủ</li>
+                <div class="code-block">
+                    ├── Sản phẩm (không có Thumbnail)
+                    │ ├── Sofa (Có Thumbnail)
+                    │ │ ├── Sofa góc (không có Thumbnail)
+                    │ │ ├── Ghế thư giãn (không có Thumbnail)
+                    │ │ ├── Ghế dài (không có Thumbnail)
+                    │ │ └── Bàn nước (không có Thumbnail)
+                    │ │
+                    │ ├── Bàn ăn (Có Thumbnail)
+                    │ │ ├── Bàn ăn 6 ghế (không có Thumbnail)
+                    │ │ ├── Ghế bàn ăn (không có Thumbnail)
+                    │ │ ├── Tủ ly (không có Thumbnail)
+                    │ │ └── Tủ bếp (không có Thumbnail)
+                    │ │
+                    │ ├── Giường (Có Thumbnail)
+                    │ │ ├── Giường đôi (không có Thumbnail)
+                    │ │ ├── Bàn trang điểm (không có Thumbnail)
+                    │ │ ├── Tủ áo (không có Thumbnail)
+                    │ │ └── Tủ đầu giường (không có Thumbnail)</div>
+            </ul>
+        </div>
+
+        <!-- Page 9b-de1: Tạo page và gắn Menu (Đề 1) -->
+        <div class="page" id="pg-9b-de1" data-branch="de1">
+            <div class="section-label">Tạo page và gắn Menu (Đề 1)</div>
+            <ul class="bullets">
+                <li>Bấm Appearance → chọn <strong>Menu</strong></li>
+                <img class="step-img" src="D5.png" alt="D5" loading="lazy">
+                <li>Chọn → <strong>create a new menu</strong> để tạo menu mới. Ở chỗ Menu Name đặt tên xong chọn →
+                    <strong>Create Menu</strong>
+                </li>
+                <img class="step-img" src="D6.png" alt="D6" loading="lazy">
+                <li>Nhìn bên phải góc trên chọn → <strong>Screen Options</strong> chọn → <strong>Product
+                        Categories</strong></li>
+                <img class="step-img" src="D7.png" alt="D7" loading="lazy">
+                <li>Chọn → <strong>Product Categories</strong> chọn tab <strong>View All</strong> tích chọn tất cả và bỏ
+                    chọn <strong>Uncategorized</strong> xong Add to menu</li>
+                <li>Sắp xếp cấu trúc như dưới</li>
+                <div class="code-block">
+                    ├── Sản phẩm
+                    │ ├── Sofa
+                    │ │ ├── Sofa góc
+                    │ │ ├── Ghế thư giãn
+                    │ │ ├── Ghế dài
+                    │ │ └── Bàn nước
+                    │ │
+                    │ ├── Bàn ăn
+                    │ │ ├── Bàn ăn 6 ghế
+                    │ │ ├── Ghế bàn ăn
+                    │ │ ├── Tủ ly
+                    │ │ └── Tủ bếp
+                    │ │
+                    │ ├── Giường
+                    │ │ ├── Giường đôi
+                    │ │ ├── Bàn trang điểm
+                    │ │ ├── Tủ áo
+                    │ │ └── Tủ đầu giường
+                    │ │
+                    ├── Phòng
+                    │ ├── Phòng khách
+                    │ ├── Phòng làm việc
+                    │ ├── Phòng ngủ
+                    │ ├── Phòng ăn
+                    │ │
+                    ├── Giới thiệu
+                    │ ├── Dự án đầu tư
+                    │ ├── Lĩnh vực hoạt động
+                    │ ├── Liên hệ
+                    │ ├── Chi nhánh
+                    │ ├── Chăm sóc khách hàng
+                    │ │
+                    ├── Blog
+                </div>
+            </ul>
+        </div>
+
+        <!-- Page 11-de1: UX Builder + Customize (Đề 1) - QR Unlock Logic -->
+        <div class="page" id="pg-11-de1" data-branch="de1">
+            <!-- QR Verification container on Phone -->
+            <div id="unlock-de1">
+                <div class="section-label">UX Builder + Customize</div>
+                <ul class="bullets">
+                    <li>Truy cập trên Browser → <code><strong>edu.huynhtu.com</strong></code> → và bật Camera để xem</li>
+                </ul>
+                <div id="reader-de1" class="camera-reader-box"></div>
+                <div style="display: flex; justify-content: center; margin: 20px 0;">
+                    <button class="btn primary" id="btn-scan-de1" onclick="startScanning('de1')" style="flex: 0 1 auto; min-width: 220px;">
+                        Cấp quyền truy cập Camera
+                    </button>
+                </div>
+            </div>
+
+            <!-- Unlocked Tutorial Content -->
+            <div id="content-de1" style="display: none;">
+                <div class="part-label">Phần 1</div>
+                <div class="section-label">Chỉnh sửa UX Builder</div>
+                <ul class="bullets">
+                    <li>Từ trang xem chọn edit bấm → <strong>Edit with UX Builder</strong></li>
+                    <li>Bấm vào bánh răng cột bên trái → cuộn xuống → chọn <strong>Clear Content...</strong> nếu cần dọn
+                        layout cũ</li>
+                    <li>Hover lên banner chính → click icon <strong>bút chì</strong> để chỉnh sửa</li>
+                    <li>Tab <strong>Content</strong>: thay tiêu đề, đoạn mô tả, text nút bấm phù hợp tên cửa hàng</li>
+                    <li>Tab <strong>Image / Background</strong>: chọn ảnh thực tế liên quan sản phẩm nội thất</li>
+                    <li>Chỉnh các section còn lại (featured products, categories…) tương tự bằng icon bút chì</li>
+                    <li>Góc trên bên phải bấm <strong>Save</strong> để lưu thay đổi</li>
+                </ul>
+
+                <a class="video-card" href="LINK_VIDEO_UXB_DE1" target="_blank">
+                    <div class="video-thumb-wrap">
+                        <img src="https://img.youtube.com/vi/default/hqdefault.jpg" alt="UX Builder thumbnail"
+                            onerror="this.style.display='none'">
+                        <div class="video-thumb-overlay">
+                            <div class="video-play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-card-meta">
+                        <span class="yt-logo">▶</span>
+                        <div class="video-card-text">
+                            <span class="video-card-title">UX Builder – Chỉnh sửa trang chủ</span>
+                            <span class="video-card-sub">Xem video hướng dẫn trên YouTube</span>
+                        </div>
+                    </div>
+                </a>
+
+                <hr class="sep">
+
+                <div class="part-label">Phần 2</div>
+                <div class="section-label">Tùy chỉnh giao diện – Customize</div>
+                <a class="video-card" href="LINK_VIDEO_CUS_DE1" target="_blank">
+                    <div class="video-thumb-wrap">
+                        <img src="https://img.youtube.com/vi/default/hqdefault.jpg" alt="Customize thumbnail"
+                            onerror="this.style.display='none'">
+                        <div class="video-thumb-overlay">
+                            <div class="video-play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-card-meta">
+                        <span class="yt-logo">▶</span>
+                        <div class="video-card-text">
+                            <span class="video-card-title">Customize – Tùy chỉnh giao diện</span>
+                            <span class="video-card-sub">Xem video hướng dẫn trên YouTube</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="notice warn">Nhớ bấm <strong>Publish</strong> — chỉ Preview sẽ không lưu được thay đổi</div>
+            </div>
+        </div>
+
+    <!-- Page 10-de1: Tạo Product (Đề 1) -->
+    <div class="page" id="pg-10-de1" data-branch="de1" data-countdown="true" data-countdown-seconds="210">
+        <div class="section-label">Tạo Product (Đề 1)</div>
+        <ul class="bullets">
+            <li>Ở trang quản trị chọn Product → <strong>Add New Product</strong></li>
+            <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
+            <li>Nhập tên sản phẩm nội thất ở <strong>Product Title</strong> (VD: Giường ngủ gỗ Sồi)</li>
+            <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (Kích thước, Chất liệu...)</li>
+            <img class="step-img" src="pr2.png" alt="pr2" loading="lazy">
+            <li>Phần <strong>Product Data</strong>: nhập <strong>Regular Price</strong> (giá bán) và <strong>Sale
+                    Price</strong> (giá bán ưu đãi)</li>
+            <img class="step-img" src="pr3.png" alt="pr3" loading="lazy">
+            <li>Upload <strong>Product Image</strong> (ảnh đại diện) + <strong>Product Gallery</strong> (ảnh bổ
+                sung)</li>
+            <li>Góc phải chọn <strong>Product Categories</strong> đúng với danh mục đã tạo</li>
+            <img class="step-img" src="pr4.png" alt="pr4" loading="lazy">
+            <li>Bấm <strong>Publish</strong> để đăng sản phẩm</li>
+            <img class="step-img" src="pr5.png" alt="pr5" loading="lazy">
+            <li>Lặp lại – tạo tổng cộng <strong>ít nhất 36 sản phẩm</strong> thuộc 12 danh mục khác nhau</li>
+        </ul>
+    </div>
+
+    <!-- Page 8-de2: Tạo Menu (Đề 2) -->
+    <div class="page" id="pg-8-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="90">
+        <div class="section-label">Tạo Menu (Đề 2)</div>
+        <ul class="bullets">
+            <li>
+                <div class="section-title">Tạo Categories Post</div>
+            </li>
+            <li>Post → Categories → <strong>Create Categories</strong></li>
+            <img class="step-img" src="n1.png" alt="n1" loading="lazy">
+            <li>Chọn Delete → nhấn <strong>Apply</strong> để xóa Categories cũ</li>
+            <img class="step-img" src="n2.png" alt="n2" loading="lazy">
+            <li>Điền thông tin để tạo Menu</li>
+            <img class="step-img" src="n3.png" alt="n3" loading="lazy">
+            <div class="code-block">
+                Name: <strong>Là dựa theo tên danh mục bài thi</strong>
+                slug: Custom hoặc để trống
+                Parent category: (chọn vào danh mục cha hoặc để trống)
+                Description: (thêm mô tả hoặc để trống)</div>
+            <li>Sau khi nhập xong → bấm <strong>Add new catalogy</strong></li>
+            <div class="notice red">Lưu ý chỉ có 2 danh mục tin tức gồm
+                <code>Đất dự án, Căn hộ</code> còn lại là bài viết
+            </div>
+            <li>
+                <div class="section-title">Tạo Categories Product</div>
+            </li>
+            <li>Product → Categories → <strong>Create Categories</strong></li>
+            <img class="step-img" src="D1.png" alt="D1" loading="lazy">
+            <li>Chọn Delete → nhấn <strong>Apply</strong> để xóa Categories cũ</li>
+            <img class="step-img" src="D2.png" alt="D2" loading="lazy">
+            <li>Điền thông tin để tạo Menu</li>
+            <img class="step-img" src="D3.png" alt="D3" loading="lazy">
+            <div class="code-block">
+                Name: <strong>Là dựa theo tên danh mục bài thi</strong>
+                slug: Custom hoặc để trống
+                Parent category: (chọn vào danh mục cha hoặc để trống)
+                Description: (thêm mô tả hoặc để trống)
+                Display type: để trống
+                Thumbnail: thêm ảnh liên quan danh mục</div>
+            <li>Sau khi nhập xong → bấm <strong>Add new catalogy</strong></li>
+            <img class="step-img" src="D4.png" alt="D4" loading="lazy">
+            <li>Lặp lại thao tác trên để tạo ra các danh mục theo yêu cầu</li>
+            <div class="notice red">Lưu ý có 4 danh mục chính thì cần ảnh gồm
+                <code>Căn hộ chung cư, Đất dự án, Đất nền, Nhà mặt phố</code> các danh mục con còn lại không cần ảnh
+                Thumbnail
+            </div>
+            <li>Cấu trúc đầy đủ</li>
+            <div class="code-block">
+                ├── Đất bán (không Thumbnail)
+                │ ├── Đất nền (Có Thumbnail)
+                │ │ ├── Đất nền TP Thủ đức (không Thumbnail)
+                │ │ ├── Đất nền quận 1 (không Thumbnail)
+                │ │ ├── Đất nền quận Tân bình (không Thumbnail)
+                │ │ └── Đất nền huyện Củ chi (không Thumbnail)
+            </div>
+        </ul>
+    </div>
+
+    <!-- Page 9-de2: Tạo bài viết (Đề 2) -->
+    <div class="page" id="pg-9-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="110">
+        <div class="section-label">Tạo bài viết (Đề 2)</div>
+        <ul class="bullets">
+            <li>Post → <strong>Add Post</strong></li>
+            <img class="step-img" src="p1.png" alt="p1" loading="lazy">
+            <li>Tìm các bài viết trên mạng theo từ khóa sau đó copy toàn bộ và dán ở đây:</li>
+            <img class="step-img" src="p2.png" alt="p2" loading="lazy">
+            <li>Sau đó chọn → <strong>Categories</strong> chọn theo danh mục và bấm Publish</li>
+            <img class="step-img" src="p3.png" alt="p3" loading="lazy">
+            <div class="notice ok"> Tạo 8 bài viết thuộc 2 danh mục:<br>
+                Dự án green city bình dương (Đất dự án)<br>
+                Dự án the trident city quảng nam (Đất dự án)<br>
+                Dự án golden city nghệ an (Đất dự án)<br>
+                Phân khu the eco point bình phước(Đất dự án)<br>
+                Rivus elie saab thủ đức(Căn hộ)<br>
+                One Central Saigon Quận 1(Căn hộ)<br>
+                Cardinal Court Quận 7(Căn hộ)<br>
+                Sunshine Horizon Quận 4(Căn hộ)
+            </div>
+        </ul>
+    </div>
+
+    <!-- Page 10-de2: Tạo page và gắn Menu (Đề 2) -->
+    <div class="page" id="pg-10-de2" data-branch="de2">
+        <div class="section-label">Tạo page và gắn Menu (Đề 2)</div>
+        <ul class="bullets">
+            <li>Bấm Appearance → chọn <strong>Menu</strong></li>
+            <img class="step-img" src="D5.png" alt="D5" loading="lazy">
+            <li>Chọn → <strong>create a new menu</strong> để tạo menu mới. Ở chỗ Menu Name đặt tên xong chọn →
+                <strong>Create Menu</strong>
+            </li>
+            <img class="step-img" src="D6.png" alt="D6" loading="lazy">
+            <li>Nhìn bên phải góc trên chọn → <strong>Screen Options</strong> chọn → <strong>Product
+                    Categories</strong></li>
+            <img class="step-img" src="D7.png" alt="D7" loading="lazy">
+            <li>Chọn → <strong>Product Categories</strong> chọn tab <strong>View All</strong> tích chọn tất cả và bỏ
+                chọn <strong>Uncategorized</strong> xong Add to menu</li>
+            <li>Sắp xếp cấu trúc như dưới</li>
+            <div class="code-block">
+                ├── Đất bán
+                │ ├── Đất dự án
+                │ │ ├── Dự án green city bình dương
+                │ │ ├── Dự án the trident city quảng nam
+                │ │ ├── Dự án golden city nghệ an
+                │ │ └── Phân khu the eco point bình phước
+                │ │
+                │ ├── Đất nền
+                │ │ ├── Đất nền TP Thủ đức
+                │ │ ├── Đất nền quận 1
+                │ │ ├── Đất nền quận Tân bình
+                │ │ └── Đất nền huyện Củ chi
+                │
+                ├── Căn hộ
+                │ ├── Rivus elie saab thủ đức
+                │ ├── One Central Saigon Quận 1
+                │ ├── Cardinal Court Quận 7
+                │ └── Sunshine Horizon Quận 4
+                │
+                ├── Giới thiệu
+                │ ├── Dự án đầu tư
+                │ ├── Lĩnh vực hoạt động
+                │ ├── Liên hệ
+                │ ├── Chi nhánh
+                │ ├── Chăm sóc khách hàng
+                │ │
+                ├── Blog
+            </div>
+        </ul>
+    </div>
+
+    <!-- Page 12-de2: UX Builder + Customize (Đề 2) - QR Unlock Logic -->
+    <div class="page" id="pg-12-de2" data-branch="de2">
+        <!-- QR Verification container on Phone -->
+        <div id="unlock-de2">
+            <div class="section-label">UX Builder + Customize</div>
+            <ul class="bullets">
+                <li>Truy cập trên Browser → <code><strong>edu.huynhtu.com</strong></code> → và bật Camera để xem</li>
+            </ul>
+            <div id="reader-de2" class="camera-reader-box"></div>
+            <div style="display: flex; justify-content: center; margin: 20px 0;">
+                <button class="btn primary" id="btn-scan-de2" onclick="startScanning('de2')" style="flex: 0 1 auto; min-width: 220px;">
+                    Cấp quyền truy cập Camera
+                </button>
+            </div>
+        </div>
+
+        <!-- Unlocked Tutorial Content -->
+        <div id="content-de2" style="display: none;">
+            <div class="part-label">Phần 1</div>
+            <div class="section-label">Chỉnh sửa UX Builder</div>
+            <ul class="bullets">
+                <li>Từ trang xem chọn edit bấm → <strong>Edit with UX Builder</strong></li>
+                <li>Bấm vào bánh răng cột bên trái → cuộn xuống → chọn <strong>Clear Content...</strong> nếu cần dọn
+                    layout cũ</li>
+                <li>Hover lên banner chính → click icon <strong>bút chì</strong> để chỉnh sửa</li>
+                <li>Tab <strong>Content</strong>: thay tiêu đề, đoạn mô tả, text nút bấm phù hợp tên công ty BĐS
+                </li>
+                <li>Tab <strong>Image / Background</strong>: chọn ảnh thực tế liên quan bất động sản</li>
+                <li>Chỉnh các section còn lại (featured products, banner phụ…) tương tự bằng icon bút chì</li>
+                <li>Góc trên bên phải bấm <strong>Save</strong> để lưu thay đổi</li>
+            </ul>
+
+            <a class="video-card" href="LINK_VIDEO_UXB_DE2" target="_blank">
+                <div class="video-thumb-wrap">
+                    <img src="https://img.youtube.com/vi/default/hqdefault.jpg" alt="UX Builder thumbnail"
+                        onerror="this.style.display='none'">
+                    <div class="video-thumb-overlay">
+                        <div class="video-play-btn">▶</div>
+                    </div>
+                </div>
+                <div class="video-card-meta">
+                    <span class="yt-logo">▶</span>
+                    <div class="video-card-text">
+                        <span class="video-card-title">UX Builder – Chỉnh sửa trang chủ</span>
+                        <span class="video-card-sub">Xem video hướng dẫn trên YouTube</span>
+                    </div>
+                </div>
+            </a>
+
+            <hr class="sep">
+
+            <div class="part-label">Phần 2</div>
+            <div class="section-label">Tùy chỉnh giao diện – Customize</div>
+            <a class="video-card" href="https://www.youtube.com/watch?v=-esiEI4HTdk&list=RDzpRTKjqcNGM&index=5"
+                target="_blank">
+                <div class="video-thumb-wrap">
+                    <img src="https://img.youtube.com/vi/-esiEI4HTdk/hqdefault.jpg" alt="Customize thumbnail">
+                    <div class="video-thumb-overlay">
+                        <div class="video-play-btn">▶</div>
+                    </div>
+                </div>
+                <div class="video-card-meta">
+                    <span class="yt-logo">▶</span>
+                    <div class="video-card-text">
+                        <span class="video-card-title">Customize – Tùy chỉnh giao diện</span>
+                        <span class="video-card-sub">Xem video hướng dẫn trên YouTube</span>
+                    </div>
+                </div>
+            </a>
+            <div class="notice warn">Nhớ bấm <strong>Publish</strong> — chỉ Preview sẽ không lưu được thay đổi</div>
+        </div>
+    </div>
+
+    <!-- Page 11-de2: Tạo Product (Đề 2) -->
+    <div class="page" id="pg-11-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="210">
+        <div class="section-label">Tạo Product (Đề 2)</div>
+        <ul class="bullets">
+            <li>Ở trang quản trị chọn Product → <strong>Add New Product</strong></li>
+            <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
+            <li>Nhập tên bất động sản ở <strong>Product Title</strong> (VD: Đất nền TP Thủ Đức – 80m²)</li>
+            <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (vị trí, diện tích, pháp lý…)</li>
+            <img class="step-img" src="pr2.png" alt="pr2" loading="lazy">
+            <li>Phần <strong>Product Data</strong>: nhập <strong>Regular Price</strong> (giá bán) và <strong>Sale
+                    Price</strong> (giá bán ưu đãi)</li>
+            <img class="step-img" src="pr3.png" alt="pr3" loading="lazy">
+            <li>Upload <strong>Product Image</strong> (ảnh đại diện) + <strong>Product Gallery</strong> (ảnh bổ
+                sung)</li>
+            <li>Góc phải chọn <strong>Product Categories</strong> đúng với danh mục đã tạo</li>
+            <img class="step-img" src="pr4.png" alt="pr4" loading="lazy">
+            <li>Bấm <strong>Publish</strong> để đăng sản phẩm</li>
+            <img class="step-img" src="pr5.png" alt="pr5" loading="lazy">
+            <li>Lặp lại – tạo tổng cộng <strong>ít nhất 12 sản phẩm</strong> thuộc 4 danh mục khác nhau gồm
+                <code>Đất nền TP Thủ đức, Đất nền quận 1, Đất nền quận Tân bình, Đất nền huyện Củ chi</code>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Page 11: Backup Website -->
+    <div class="page" id="pg-11">
+        <div class="section-label">Backup Website</div>
+        <ul class="bullets">
+            <li>Ở trang quản trị chọn → <strong>Plugin</strong></li>
+            <img class="step-img" src="bk1.png" alt="bk1" loading="lazy">
+            <li>Bấm vào thanh search và gõ <strong>Duplicator</strong> và bấm <strong>Install Now</strong> sau đó
+                chọn <strong>Activate</strong></li>
+            <img class="step-img" src="bk2.png" alt="bk2" loading="lazy">
+            <img class="step-img" src="bk3.png" alt="bk3" loading="lazy">
+            <img class="step-img" src="bk4.png" alt="bk4" loading="lazy">
+            <li>Bấm → <strong>Skip</strong></li>
+            <img class="step-img" src="bk5.png" alt="bk5" loading="lazy">
+            <li>Bấm → <strong>Create New</strong></li>
+            <img class="step-img" src="bk6.png" alt="bk6" loading="lazy">
+            <li>Bấm → <strong>Next</strong></li>
+            <img class="step-img" src="bk7.png" alt="bk7" loading="lazy">
+            <li>Bấm → <strong>Build</strong></li>
+            <img class="step-img" src="bk8.png" alt="bk8" loading="lazy">
+            <li>Bấm → <strong>Download Both Files</strong></li>
+            <img class="step-img" src="bk9.png" alt="bk9" loading="lazy">
+        </ul>
+    </div>
+
+    <!-- Page 12: Triển khai website lên Server -->
+    <div class="page" id="pg-12">
+        <div class="section-label">Triển khai website lên Server</div>
+        <ul class="bullets">
+            <li>Mở phần mềm <strong>WinSCP</strong> đăng nhập thông tin như phía dưới:</li>
+            <div class="code-block">
+                Host name: 192.168.26.34
+                User name: ftpuser
+                Password: Aa123456</div>
+            <img class="step-img" src="bs1.png" alt="bs1" loading="lazy">
+            <li>Truy cập vào đường dẫn <code><strong>/opt/lampp/htdocs</strong></code> và vào đúng thư mục của sinh
+                viên.</li>
+            <img class="step-img" src="bs2.png" alt="bs2" loading="lazy">
+            <li>Sau đó bỏ 2 file như ảnh dưới vào thư mục</li>
+            <img class="step-img" src="bs3.png" alt="bs3" loading="lazy">
+            <li>Truy cập trên google vào đường dẫn <code><strong>192.168.26.34</strong></code> và vào đúng thư mục
+                của sinh viên.</li>
+            <li>Bấm → <strong>installer.php</strong></li>
+            <img class="step-img" src="bs4.png" alt="bs4" loading="lazy">
+            <li>Truy cập thêm trên google vào đường dẫn <code><strong>192.168.26.34/phpmyadmin</strong></code> bấm
+                vào <strong>New / Mới</strong> và tạo database theo mã số thư mục của sinh viên.</li>
+            <img class="step-img" src="bs5.png" alt="bs5" loading="lazy">
+            <li>Sau đó quay lại trang <code><strong>192.168.26.34</strong></code> Điền vào các thông tin dưới và bấm
+                → <strong>Validate</strong></li>
+            <img class="step-img" src="bs7.png" alt="bs7" loading="lazy">
+            <li>Tích vào ô dưới và bấm → <strong>Next</strong></li>
+            <img class="step-img" src="bs6.png" alt="bs6" loading="lazy">
+            <li>Chọn → <strong>OK</strong></li>
+            <img class="step-img" src="bs8.png" alt="bs8" loading="lazy">
+        </ul>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-btns">
+        <button class="btn" id="btn-prev" onclick="handleMove(-1)" disabled>← Quay lại</button>
+        <button class="btn primary" id="btn-next" onclick="handleMove(1)">Tiếp tục →</button>
+    </div>
+
+    </div>
+
+    <script>
+        const pages = Array.from(document.querySelectorAll('.app .page'));
+
+        let currentIdx = parseInt(localStorage.getItem('wp_currentIdx')) || 0;
+        let selectedBranch = localStorage.getItem('wp_selectedBranch') || null;
+
+        let countdownInterval = null;
+        let remainingTime = 0;
+
+        // Render QR Code on PC Warning View
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof QRCode !== 'undefined') {
+                new QRCode(document.getElementById("qrcode-desktop"), {
+                    text: "huynhtu_wordpress_tutorial",
+                    width: 150,
+                    height: 150,
+                    colorDark: "#1C1917",
+                    colorLight: "#FFFFFF",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+        });
+
+        // Interactive Camera scanning code functions
+        let activeScannerInstance = null;
+
+        function startScanning(branch) {
+            const readerId = `reader-${branch}`;
+            const scanBtn = document.getElementById(`btn-scan-${branch}`);
+            const manualDiv = document.querySelector(`#unlock-${branch} .manual-unlock`);
+            const readerDiv = document.getElementById(readerId);
+
+            scanBtn.style.display = 'none';
+            if (manualDiv) manualDiv.style.display = 'none';
+            readerDiv.style.display = 'block';
+
+            if (activeScannerInstance) {
+                activeScannerInstance.clear();
+            }
+
+            activeScannerInstance = new Html5Qrcode(readerId);
+
+            const config = {
+                fps: 10,
+                qrbox: { width: 200, height: 200 }
+            };
+
+            activeScannerInstance.start(
+                { facingMode: "environment" },
+                config,
+                (decodedText) => {
+                    activeScannerInstance.stop().then(() => {
+                        readerDiv.style.display = 'none';
+                        scanBtn.style.display = 'inline-block';
+                        if (manualDiv) manualDiv.style.display = 'block';
+                        activeScannerInstance = null;
+
+                        const text = decodedText.trim();
+                        if (text === 'huynhtu_wordpress_tutorial' || text === `${branch}_video` || text === branch) {
+                            unlockContent(branch);
+                        } else {
+                            alert(`Mã QR không khớp với tài liệu này! Vui lòng quét đúng mã QR Hướng dẫn trên màn hình máy tính.`);
+                        }
+                    }).catch(err => {
+                        console.error(err);
+                        unlockContent(branch); // Fallback unlock
+                    });
+                },
+                (errorMessage) => {
+                    // Quiet scanning error handler
+                }
+            ).catch(err => {
+                console.error("Camera start failed: ", err);
+                alert("Không thể kết nối máy ảnh. Vui lòng thử lại, cấp quyền máy ảnh, hoặc nhập mã tay.");
+                scanBtn.style.display = 'inline-block';
+                if (manualDiv) manualDiv.style.display = 'block';
+                readerDiv.style.display = 'none';
+            });
+        }
+
+        function manualUnlock(branch) {
+            const input = document.getElementById(`code-input-${branch}`);
+            const val = input.value.trim().toLowerCase();
+            if (val === 'huynhtu_wordpress_tutorial' || val === branch || val === `${branch}_video` || val === 'teacher' || val === '123456') {
+                unlockContent(branch);
+            } else {
+                alert("Mã mở khóa sai! Vui lòng nhập lại.");
+            }
+        }
+
+        function unlockContent(branch) {
+            localStorage.setItem(`unlocked_${branch}`, 'true');
+            checkUnlocks();
+        }
+
+        function checkUnlocks() {
+            ['de1', 'de2'].forEach(branch => {
+                const isUnlocked = localStorage.getItem(`unlocked_${branch}`) === 'true';
+                const unlockWrapper = document.getElementById(`unlock-${branch}`);
+                const actualContent = document.getElementById(`content-${branch}`);
+
+                if (isUnlocked) {
+                    if (unlockWrapper) unlockWrapper.style.display = 'none';
+                    if (actualContent) actualContent.style.display = 'block';
+                } else {
+                    if (unlockWrapper) unlockWrapper.style.display = 'block';
+                    if (actualContent) actualContent.style.display = 'none';
+                }
+            });
+        }
+
+        function selectBranch(branchName) {
+            selectedBranch = branchName;
+            localStorage.setItem('wp_selectedBranch', branchName);
+
+            document.getElementById('opt-de1').classList.toggle('selected', branchName === 'de1');
+            document.getElementById('opt-de2').classList.toggle('selected', branchName === 'de2');
+
+            handleMove(1);
+        }
+
+        function renderActivePage() {
+            pages.forEach((page, idx) => {
+                page.classList.toggle('active', idx === currentIdx);
+            });
+
+            document.getElementById('btn-prev').disabled = (currentIdx === 0);
+
+            const isLastPage = (currentIdx === pages.length - 1);
+            const btnNext = document.getElementById('btn-next');
+            btnNext.textContent = isLastPage ? 'Hoàn thành' : 'Tiếp tục →';
+            btnNext.disabled = false;
+
+            if (pages[currentIdx].id === 'pg-7' && !selectedBranch) {
+                btnNext.disabled = true;
+            } else {
+                btnNext.disabled = false;
+            }
+
+            if (document.getElementById('opt-de1') && document.getElementById('opt-de2')) {
+                document.getElementById('opt-de1').classList.toggle('selected', selectedBranch === 'de1');
+                document.getElementById('opt-de2').classList.toggle('selected', selectedBranch === 'de2');
+            }
+
+            // Perform QR content unlock verification checks
+            checkUnlocks();
+
+            // Handle slide countdown timers
+            clearInterval(countdownInterval);
+            const currentPage = pages[currentIdx];
+
+            if (currentPage.getAttribute('data-countdown') === 'true') {
+                const isTimerDone = localStorage.getItem(`wp_timer_done_${currentPage.id}`);
+
+                if (!isTimerDone) {
+                    const countdownSeconds = parseInt(currentPage.getAttribute('data-countdown-seconds')) || 180;
+                    const savedTime = localStorage.getItem(`wp_remaining_time_${currentPage.id}`);
+                    if (savedTime !== null) {
+                        remainingTime = parseInt(savedTime);
+                    } else {
+                        remainingTime = countdownSeconds;
+                    }
+
+                    if (remainingTime > 0) {
+                        btnNext.disabled = true;
+                        updateTimerText(btnNext, remainingTime);
+
+                        countdownInterval = setInterval(() => {
+                            remainingTime--;
+                            localStorage.setItem(`wp_remaining_time_${currentPage.id}`, remainingTime);
+
+                            if (remainingTime <= 0) {
+                                clearInterval(countdownInterval);
+                                btnNext.disabled = false;
+                                btnNext.textContent = isLastPage ? 'Hoàn thành' : 'Tiếp tục →';
+                                localStorage.setItem(`wp_timer_done_${currentPage.id}`, 'true');
+                                localStorage.removeItem(`wp_remaining_time_${currentPage.id}`);
+                            } else {
+                                updateTimerText(btnNext, remainingTime);
+                            }
+                        }, 1000);
+                    }
+                }
+            }
+        }
+
+        function updateTimerText(buttonEl, timeInSeconds) {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+            buttonEl.textContent = `Tiếp tục (${minutes}:${formattedSeconds})`;
+        }
+
+        function handleMove(direction) {
+            // Redirect to YouTube link when 'Hoàn thành' is clicked on the last page
+            if (direction === 1 && currentIdx === pages.length - 1) {
+                window.location.href = "https://www.youtube.com/watch?v=U1usrHw-GvI&list=RDU1usrHw-GvI&start_radio=1";
+                return;
+            }
+
+            let nextIdx = currentIdx + direction;
+
+            // Stop scanner if active when moving away
+            if (activeScannerInstance) {
+                try {
+                    activeScannerInstance.stop();
+                    activeScannerInstance = null;
+                } catch (e) { }
+            }
+
+            while (nextIdx >= 0 && nextIdx < pages.length) {
+                const nextPage = pages[nextIdx];
+                const pageBranch = nextPage.getAttribute('data-branch');
+
+                if (!pageBranch || pageBranch === selectedBranch) {
+                    currentIdx = nextIdx;
+                    localStorage.setItem('wp_currentIdx', currentIdx);
+                    window.scrollTo(0, 0);
+                    renderActivePage();
+                    return;
+                }
+
+                nextIdx += direction;
+            }
+        }
+
+        // Auto-load YouTube thumbnails
+        document.querySelectorAll('.video-card').forEach(card => {
+            const href = card.getAttribute('href') || '';
+            const match = href.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (match) {
+                const videoId = match[1];
+                const img = card.querySelector('.video-thumb-wrap img');
+                if (img) {
+                    img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                    img.removeAttribute('onerror');
+                }
+            }
+        });
+
+        // Initialize displays
+        renderActivePage();
+    </script>
+</body>
+
+</html>

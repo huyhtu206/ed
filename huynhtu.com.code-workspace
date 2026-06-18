@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../huynhtu.com"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../video.huynhtu.com"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "image.huynhtu.com"
+	}
+}
