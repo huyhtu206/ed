@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hướng Dẫn Từng Bước WordPress</title>
+    <title>Hướng Dẫn WordPress</title>
 
     <!-- Google Fonts: Be Vietnam Pro (hỗ trợ tiếng Việt) & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <!-- QRCode Generator Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -624,14 +626,8 @@
 
     <!-- Desktop View: Displays single QR code above the Warning message -->
     <div class="desktop-msg">
-        <div class="desktop-qr-container">
-            <div class="desktop-qr-box">
-                <div id="qrcode-desktop"></div>
-            </div>
-        </div>
         <h2>Vui lòng mở trên điện thoại</h2>
         <p>Tài liệu này chỉ hỗ trợ cho thiết bị di động.</p>
-        <a class="btn-download" href="index.html" download="HuongDan_WordPress.html">⬇ Tải file về máy</a>
     </div>
 
     <!-- Phone View: Mobile application -->
@@ -707,7 +703,11 @@
         <div class="page" id="pg-5">
             <div class="section-label">Cài đặt Theme & Plugin</div>
             <ul class="bullets">
-                <li>Ở trang quản trị chọn <strong>Appearance → Themes → Add New</strong></li>
+                <li>Truy cập vào <strong>192.168.26.33/themes</strong> và tải <strong>flatsome_v2.zip</strong></li>
+                <img class="step-img" src="vv.png" alt="add" loading="lazy">
+                <li>Nếu hiện thông báo thì bấm <strong>Keep</strong></li>
+                <img class="step-img" src="v1.png" alt="add" loading="lazy">
+                <li> Sau đó quay lại trang quản trị chọn <strong>Appearance → Themes → Add New</strong></li>
                 <img class="step-img" src="addtheme.png" alt="add" loading="lazy">
                 <li>Nhấn <strong>Upload Theme</strong></li>
                 <li>Chọn <code>flatsome.zip</code> → Install Now → <strong>Activate</strong></li>
@@ -739,9 +739,10 @@
                 <li>ở chế độ xem website → <strong>chọn Edit page</strong> → <strong>chọn Edit with UX Builder</strong>
                 </li>
                 <img class="step-img" src="e1.png" alt="e1" loading="lazy">
-                <li>Bấm vào bánh răng cột bên trái trên cùng cuộn xuống → chọn <strong>Clear Content...</strong></li>
+                <li>Ở cột bên trái bấm vào bánh răng phía trên bên phải và cuộn xuống → chọn <strong>Clear
+                        Content...</strong></li>
                 <img class="step-img" src="e2.png" alt="e2" loading="lazy">
-                <li>Chọn themes theo đề yêu cầu: Nội thất → chọn <strong>Vendor Shop</strong> còn Bất động sản → chọn
+                <li>Chọn themes theo đề yêu cầu: Nội thất → chọn <strong>Vendor Shop</strong> Bất động sản → chọn
                     <strong>Mega Shop</strong>
                 </li>
                 <img class="step-img" src="e3.png" alt="e3" loading="lazy">
@@ -764,7 +765,7 @@
         </div>
 
         <!-- Page 8-de1: Tạo Menu (Đề 1) -->
-        <div class="page" id="pg-8-de1" data-branch="de1" data-countdown="true">
+        <div class="page" id="pg-8-de1" data-branch="de1" data-countdown="true" data-countdown-seconds="30">
             <div class="section-label">Tạo Menu (Đề 1)</div>
             <ul class="bullets">
                 <li>Product → Categories → <strong>Create Categories</strong></li>
@@ -811,7 +812,7 @@
         </div>
 
         <!-- Page 9-de1: Tạo Categories Product (Đề 1) -->
-        <div class="page" id="pg-9-de1" data-branch="de1" data-countdown="true" data-countdown-seconds="90">
+        <div class="page" id="pg-9-de1" data-branch="de1" data-countdown="true" data-countdown-seconds="30">
             <div class="section-label">Tạo Categories Product (Đề 1)</div>
             <ul class="bullets">
                 <li>Product → Categories → <strong>Create Categories</strong></li>
@@ -915,20 +916,204 @@
         <div class="page" id="pg-11-de1" data-branch="de1">
             <!-- QR Verification container on Phone -->
             <div id="unlock-de1">
+                <div class="section-label">UX Builder + Customize(Đề 1)</div>
+                <ul class="bullets">
+                    <li>Ở trang giao diện chọn <strong>Store Comming Soon</strong></li>
+                    <img class="step-img" src="ux2.png" alt="ux2" loading="lazy">
+                    <li>Nhấn <strong> Live</strong> bấm Save Changes</li>
+                    <img class="step-img" src="ux3.png" alt="ux3" loading="lazy">
+                    <li>Quay giao diện chọn <strong>Edit With UX Builder</strong></li>
+                    <img class="step-img" src="ux1.png" alt="ux1" loading="lazy">
+                    <li>Chỉnh sửa Slider Bar</li>
+                    <img class="step-img" src="ux4.png" alt="ux4" loading="lazy">
+                    <li> Chỉnh sửa ô nào chọn ô đó và Chọn <strong>Changes media</strong></li>
+                    <img class="step-img" src="ux5.png" alt="ux5" loading="lazy">
+                    <li>Upload ảnh lên chọn <strong>Use this image</strong></li>
+                    <img class="step-img" src="ux6.png" alt="ux6" loading="lazy">
+                    <li>Bấm vào <strong>Text</strong> chọn open text editor</li>
+                    <img class="step-img" src="ux7.png" alt="ux7" loading="lazy">
+                    <li>Chỉnh sửa nội dung phù hợp r bấm <strong>OK</strong></li>
+                    <img class="step-img" src="ux8.png" alt="ux8" loading="lazy">
+                    <li>Hoàn thành tất cả 5 Banner </li>
+                    <img class="step-img" src="ux10.png" alt="ux10" loading="lazy">
+                    <li> Sau đó chọn phần <strong>Products Catagories</strong></li>
+                    <img class="step-img" src="ux9.png" alt="ux9" loading="lazy">
+                    <li>Chọn các danh mục trước đó đã tạo có Thumbnail và thêm vào <strong>Agree and
+                            Continue</strong> → bấm tiếp <strong>View your new website!</strong></li>
+                    <img class="step-img" src="f8.png" alt="f8" loading="lazy">
+                </ul>
+            </div>
+        </div>
+
+        <!-- Page 10-de1: Tạo Product (Đề 1) -->
+        <div class="page" id="pg-10-de1" data-branch="de1" data-countdown="true" data-countdown-seconds="30">
+            <div class="section-label">Tạo Product</div>
+            <ul class="bullets">
+                <li>Ở trang quản trị chọn Product → <strong>Add New Product</strong></li>
+                <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
+                <li>Nhập tên sản phẩm nội thất ở <strong>Product Title</strong> (VD: Giường ngủ gỗ Sồi)</li>
+                <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (Kích thước, Chất liệu...)</li>
+                <img class="step-img" src="pr2.png" alt="pr2" loading="lazy">
+                <li>Phần <strong>Product Data</strong>: nhập <strong>Regular Price</strong> (giá bán) và <strong>Sale
+                        Price</strong> (giá bán ưu đãi)</li>
+                <img class="step-img" src="pr3.png" alt="pr3" loading="lazy">
+                <li>Upload <strong>Product Image</strong> (ảnh đại diện) + <strong>Product Gallery</strong> (ảnh bổ
+                    sung)</li>
+                <li>Góc phải chọn <strong>Product Categories</strong> đúng với danh mục đã tạo</li>
+                <img class="step-img" src="pr4.png" alt="pr4" loading="lazy">
+                <li>Bấm <strong>Publish</strong> để đăng sản phẩm</li>
+                <img class="step-img" src="pr5.png" alt="pr5" loading="lazy">
+                <li>Lặp lại – tạo tổng cộng <strong>ít nhất 36 sản phẩm</strong> thuộc 12 danh mục khác nhau</li>
+            </ul>
+        </div>
+
+        <!-- Page 8-de2: Tạo Menu (Đề 2) -->
+        <div class="page" id="pg-8-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="30">
+            <div class="section-label">Tạo Menu (Đề 2)</div>
+            <ul class="bullets">
+                <li>
+                    <div class="section-title">Tạo Categories Post</div>
+                </li>
+                <li>Post → Categories → <strong>Create Categories</strong></li>
+                <img class="step-img" src="n1.png" alt="n1" loading="lazy">
+                <li>Chọn Delete → nhấn <strong>Apply</strong> để xóa Categories cũ</li>
+                <img class="step-img" src="n2.png" alt="n2" loading="lazy">
+                <li>Điền thông tin để tạo Menu</li>
+                <img class="step-img" src="n3.png" alt="n3" loading="lazy">
+                <div class="code-block">
+                    Name: <strong>Là dựa theo tên danh mục bài thi</strong>
+                    slug: Custom hoặc để trống
+                    Parent category: (chọn vào danh mục cha hoặc để trống)
+                    Description: (thêm mô tả hoặc để trống)</div>
+                <li>Sau khi nhập xong → bấm <strong>Add new catalogy</strong></li>
+                <div class="notice red">Lưu ý chỉ có 2 danh mục tin tức gồm
+                    <code>Đất dự án, Căn hộ</code> còn lại là bài viết
+                </div>
+                <li>
+                    <div class="section-title">Tạo Categories Product</div>
+                </li>
+                <li>Product → Categories → <strong>Create Categories</strong></li>
+                <img class="step-img" src="D1.png" alt="D1" loading="lazy">
+                <li>Chọn Delete → nhấn <strong>Apply</strong> để xóa Categories cũ</li>
+                <img class="step-img" src="D2.png" alt="D2" loading="lazy">
+                <li>Điền thông tin để tạo Menu</li>
+                <img class="step-img" src="D3.png" alt="D3" loading="lazy">
+                <div class="code-block">
+                    Name: <strong>Là dựa theo tên danh mục bài thi</strong>
+                    slug: Custom hoặc để trống
+                    Parent category: (chọn vào danh mục cha hoặc để trống)
+                    Description: (thêm mô tả hoặc để trống)
+                    Display type: để trống
+                    Thumbnail: thêm ảnh liên quan danh mục</div>
+                <li>Sau khi nhập xong → bấm <strong>Add new catalogy</strong></li>
+                <img class="step-img" src="D4.png" alt="D4" loading="lazy">
+                <li>Lặp lại thao tác trên để tạo ra các danh mục theo yêu cầu</li>
+                <div class="notice red">Lưu ý có 4 danh mục chính thì cần ảnh gồm
+                    <code>Căn hộ chung cư, Đất dự án, Đất nền, Nhà mặt phố</code> các danh mục con còn lại không cần ảnh
+                    Thumbnail
+                </div>
+                <li>Cấu trúc đầy đủ</li>
+                <div class="code-block">
+                    ├── Đất bán (không Thumbnail)
+                    │ ├── Đất nền (Có Thumbnail)
+                    │ │ ├── Đất nền TP Thủ đức (không Thumbnail)
+                    │ │ ├── Đất nền quận 1 (không Thumbnail)
+                    │ │ ├── Đất nền quận Tân bình (không Thumbnail)
+                    │ │ └── Đất nền huyện Củ chi (không Thumbnail)
+                </div>
+            </ul>
+        </div>
+
+        <!-- Page 9-de2: Tạo bài viết (Đề 2) -->
+        <div class="page" id="pg-9-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="30">
+            <div class="section-label">Tạo bài viết (Đề 2)</div>
+            <ul class="bullets">
+                <li>Post → <strong>Add Post</strong></li>
+                <img class="step-img" src="p1.png" alt="p1" loading="lazy">
+                <li>Tìm các bài viết trên mạng theo từ khóa sau đó copy toàn bộ và dán ở đây:</li>
+                <img class="step-img" src="p2.png" alt="p2" loading="lazy">
+                <li>Sau đó chọn → <strong>Categories</strong> chọn theo danh mục và bấm Publish</li>
+                <img class="step-img" src="p3.png" alt="p3" loading="lazy">
+                <div class="notice ok"> Tạo 8 bài viết thuộc 2 danh mục:<br>
+                    Dự án green city bình dương (Đất dự án)<br>
+                    Dự án the trident city quảng nam (Đất dự án)<br>
+                    Dự án golden city nghệ an (Đất dự án)<br>
+                    Phân khu the eco point bình phước(Đất dự án)<br>
+                    Rivus elie saab thủ đức(Căn hộ)<br>
+                    One Central Saigon Quận 1(Căn hộ)<br>
+                    Cardinal Court Quận 7(Căn hộ)<br>
+                    Sunshine Horizon Quận 4(Căn hộ)
+                </div>
+            </ul>
+        </div>
+
+        <!-- Page 10-de2: Tạo page và gắn Menu (Đề 2) -->
+        <div class="page" id="pg-10-de2" data-branch="de2">
+            <div class="section-label">Tạo page và gắn Menu (Đề 2)</div>
+            <ul class="bullets">
+                <li>Bấm Appearance → chọn <strong>Menu</strong></li>
+                <img class="step-img" src="D5.png" alt="D5" loading="lazy">
+                <li>Chọn → <strong>create a new menu</strong> để tạo menu mới. Ở chỗ Menu Name đặt tên xong chọn →
+                    <strong>Create Menu</strong>
+                </li>
+                <img class="step-img" src="D6.png" alt="D6" loading="lazy">
+                <li>Nhìn bên phải góc trên chọn → <strong>Screen Options</strong> chọn → <strong>Product
+                        Categories</strong></li>
+                <img class="step-img" src="D7.png" alt="D7" loading="lazy">
+                <li>Chọn → <strong>Product Categories</strong> chọn tab <strong>View All</strong> tích chọn tất cả và bỏ
+                    chọn <strong>Uncategorized</strong> xong Add to menu</li>
+                <li>Sắp xếp cấu trúc như dưới</li>
+                <div class="code-block">
+                    ├── Đất bán
+                    │ ├── Đất dự án
+                    │ │ ├── Dự án green city bình dương
+                    │ │ ├── Dự án the trident city quảng nam
+                    │ │ ├── Dự án golden city nghệ an
+                    │ │ └── Phân khu the eco point bình phước
+                    │ │
+                    │ ├── Đất nền
+                    │ │ ├── Đất nền TP Thủ đức
+                    │ │ ├── Đất nền quận 1
+                    │ │ ├── Đất nền quận Tân bình
+                    │ │ └── Đất nền huyện Củ chi
+                    │
+                    ├── Căn hộ
+                    │ ├── Rivus elie saab thủ đức
+                    │ ├── One Central Saigon Quận 1
+                    │ ├── Cardinal Court Quận 7
+                    │ └── Sunshine Horizon Quận 4
+                    │
+                    ├── Giới thiệu
+                    │ ├── Dự án đầu tư
+                    │ ├── Lĩnh vực hoạt động
+                    │ ├── Liên hệ
+                    │ ├── Chi nhánh
+                    │ ├── Chăm sóc khách hàng
+                    │ │
+                    ├── Blog
+                </div>
+            </ul>
+        </div>
+
+        <!-- Page 12-de2: UX Builder + Customize (Đề 2) - QR Unlock Logic -->
+        <div class="page" id="pg-12-de2" data-branch="de2">
+            <!-- QR Verification container on Phone -->
+            <div id="unlock-de2">
                 <div class="section-label">UX Builder + Customize</div>
                 <ul class="bullets">
-                    <li>Truy cập trên Browser → <code><strong>edu.huynhtu.com</strong></code> → và bật Camera để xem</li>
+                    <li>Truy cập trên Browser → <code><strong>fl.huynhtu.com</strong></code> → và bật Camera để xem</li>
                 </ul>
-                <div id="reader-de1" class="camera-reader-box"></div>
+                <div id="reader-de2" class="camera-reader-box"></div>
                 <div style="display: flex; justify-content: center; margin: 20px 0;">
-                    <button class="btn primary" id="btn-scan-de1" onclick="startScanning('de1')" style="flex: 0 1 auto; min-width: 220px;">
+                    <button class="btn primary" id="btn-scan-de2" onclick="startScanning('de2')"
+                        style="flex: 0 1 auto; min-width: 220px;">
                         Cấp quyền truy cập Camera
                     </button>
                 </div>
             </div>
 
             <!-- Unlocked Tutorial Content -->
-            <div id="content-de1" style="display: none;">
+            <div id="content-de2" style="display: none;">
                 <div class="part-label">Phần 1</div>
                 <div class="section-label">Chỉnh sửa UX Builder</div>
                 <ul class="bullets">
@@ -936,13 +1121,14 @@
                     <li>Bấm vào bánh răng cột bên trái → cuộn xuống → chọn <strong>Clear Content...</strong> nếu cần dọn
                         layout cũ</li>
                     <li>Hover lên banner chính → click icon <strong>bút chì</strong> để chỉnh sửa</li>
-                    <li>Tab <strong>Content</strong>: thay tiêu đề, đoạn mô tả, text nút bấm phù hợp tên cửa hàng</li>
-                    <li>Tab <strong>Image / Background</strong>: chọn ảnh thực tế liên quan sản phẩm nội thất</li>
-                    <li>Chỉnh các section còn lại (featured products, categories…) tương tự bằng icon bút chì</li>
+                    <li>Tab <strong>Content</strong>: thay tiêu đề, đoạn mô tả, text nút bấm phù hợp tên công ty BĐS
+                    </li>
+                    <li>Tab <strong>Image / Background</strong>: chọn ảnh thực tế liên quan bất động sản</li>
+                    <li>Chỉnh các section còn lại (featured products, banner phụ…) tương tự bằng icon bút chì</li>
                     <li>Góc trên bên phải bấm <strong>Save</strong> để lưu thay đổi</li>
                 </ul>
 
-                <a class="video-card" href="LINK_VIDEO_UXB_DE1" target="_blank">
+                <a class="video-card" href="LINK_VIDEO_UXB_DE2" target="_blank">
                     <div class="video-thumb-wrap">
                         <img src="https://img.youtube.com/vi/default/hqdefault.jpg" alt="UX Builder thumbnail"
                             onerror="this.style.display='none'">
@@ -963,10 +1149,10 @@
 
                 <div class="part-label">Phần 2</div>
                 <div class="section-label">Tùy chỉnh giao diện – Customize</div>
-                <a class="video-card" href="LINK_VIDEO_CUS_DE1" target="_blank">
+                <a class="video-card" href="https://www.youtube.com/watch?v=-esiEI4HTdk&list=RDzpRTKjqcNGM&index=5"
+                    target="_blank">
                     <div class="video-thumb-wrap">
-                        <img src="https://img.youtube.com/vi/default/hqdefault.jpg" alt="Customize thumbnail"
-                            onerror="this.style.display='none'">
+                        <img src="https://img.youtube.com/vi/-esiEI4HTdk/hqdefault.jpg" alt="Customize thumbnail">
                         <div class="video-thumb-overlay">
                             <div class="video-play-btn">▶</div>
                         </div>
@@ -983,318 +1169,126 @@
             </div>
         </div>
 
-    <!-- Page 10-de1: Tạo Product (Đề 1) -->
-    <div class="page" id="pg-10-de1" data-branch="de1" data-countdown="true" data-countdown-seconds="210">
-        <div class="section-label">Tạo Product (Đề 1)</div>
-        <ul class="bullets">
-            <li>Ở trang quản trị chọn Product → <strong>Add New Product</strong></li>
-            <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
-            <li>Nhập tên sản phẩm nội thất ở <strong>Product Title</strong> (VD: Giường ngủ gỗ Sồi)</li>
-            <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (Kích thước, Chất liệu...)</li>
-            <img class="step-img" src="pr2.png" alt="pr2" loading="lazy">
-            <li>Phần <strong>Product Data</strong>: nhập <strong>Regular Price</strong> (giá bán) và <strong>Sale
-                    Price</strong> (giá bán ưu đãi)</li>
-            <img class="step-img" src="pr3.png" alt="pr3" loading="lazy">
-            <li>Upload <strong>Product Image</strong> (ảnh đại diện) + <strong>Product Gallery</strong> (ảnh bổ
-                sung)</li>
-            <li>Góc phải chọn <strong>Product Categories</strong> đúng với danh mục đã tạo</li>
-            <img class="step-img" src="pr4.png" alt="pr4" loading="lazy">
-            <li>Bấm <strong>Publish</strong> để đăng sản phẩm</li>
-            <img class="step-img" src="pr5.png" alt="pr5" loading="lazy">
-            <li>Lặp lại – tạo tổng cộng <strong>ít nhất 36 sản phẩm</strong> thuộc 12 danh mục khác nhau</li>
-        </ul>
-    </div>
-
-    <!-- Page 8-de2: Tạo Menu (Đề 2) -->
-    <div class="page" id="pg-8-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="90">
-        <div class="section-label">Tạo Menu (Đề 2)</div>
-        <ul class="bullets">
-            <li>
-                <div class="section-title">Tạo Categories Post</div>
-            </li>
-            <li>Post → Categories → <strong>Create Categories</strong></li>
-            <img class="step-img" src="n1.png" alt="n1" loading="lazy">
-            <li>Chọn Delete → nhấn <strong>Apply</strong> để xóa Categories cũ</li>
-            <img class="step-img" src="n2.png" alt="n2" loading="lazy">
-            <li>Điền thông tin để tạo Menu</li>
-            <img class="step-img" src="n3.png" alt="n3" loading="lazy">
-            <div class="code-block">
-                Name: <strong>Là dựa theo tên danh mục bài thi</strong>
-                slug: Custom hoặc để trống
-                Parent category: (chọn vào danh mục cha hoặc để trống)
-                Description: (thêm mô tả hoặc để trống)</div>
-            <li>Sau khi nhập xong → bấm <strong>Add new catalogy</strong></li>
-            <div class="notice red">Lưu ý chỉ có 2 danh mục tin tức gồm
-                <code>Đất dự án, Căn hộ</code> còn lại là bài viết
-            </div>
-            <li>
-                <div class="section-title">Tạo Categories Product</div>
-            </li>
-            <li>Product → Categories → <strong>Create Categories</strong></li>
-            <img class="step-img" src="D1.png" alt="D1" loading="lazy">
-            <li>Chọn Delete → nhấn <strong>Apply</strong> để xóa Categories cũ</li>
-            <img class="step-img" src="D2.png" alt="D2" loading="lazy">
-            <li>Điền thông tin để tạo Menu</li>
-            <img class="step-img" src="D3.png" alt="D3" loading="lazy">
-            <div class="code-block">
-                Name: <strong>Là dựa theo tên danh mục bài thi</strong>
-                slug: Custom hoặc để trống
-                Parent category: (chọn vào danh mục cha hoặc để trống)
-                Description: (thêm mô tả hoặc để trống)
-                Display type: để trống
-                Thumbnail: thêm ảnh liên quan danh mục</div>
-            <li>Sau khi nhập xong → bấm <strong>Add new catalogy</strong></li>
-            <img class="step-img" src="D4.png" alt="D4" loading="lazy">
-            <li>Lặp lại thao tác trên để tạo ra các danh mục theo yêu cầu</li>
-            <div class="notice red">Lưu ý có 4 danh mục chính thì cần ảnh gồm
-                <code>Căn hộ chung cư, Đất dự án, Đất nền, Nhà mặt phố</code> các danh mục con còn lại không cần ảnh
-                Thumbnail
-            </div>
-            <li>Cấu trúc đầy đủ</li>
-            <div class="code-block">
-                ├── Đất bán (không Thumbnail)
-                │ ├── Đất nền (Có Thumbnail)
-                │ │ ├── Đất nền TP Thủ đức (không Thumbnail)
-                │ │ ├── Đất nền quận 1 (không Thumbnail)
-                │ │ ├── Đất nền quận Tân bình (không Thumbnail)
-                │ │ └── Đất nền huyện Củ chi (không Thumbnail)
-            </div>
-        </ul>
-    </div>
-
-    <!-- Page 9-de2: Tạo bài viết (Đề 2) -->
-    <div class="page" id="pg-9-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="110">
-        <div class="section-label">Tạo bài viết (Đề 2)</div>
-        <ul class="bullets">
-            <li>Post → <strong>Add Post</strong></li>
-            <img class="step-img" src="p1.png" alt="p1" loading="lazy">
-            <li>Tìm các bài viết trên mạng theo từ khóa sau đó copy toàn bộ và dán ở đây:</li>
-            <img class="step-img" src="p2.png" alt="p2" loading="lazy">
-            <li>Sau đó chọn → <strong>Categories</strong> chọn theo danh mục và bấm Publish</li>
-            <img class="step-img" src="p3.png" alt="p3" loading="lazy">
-            <div class="notice ok"> Tạo 8 bài viết thuộc 2 danh mục:<br>
-                Dự án green city bình dương (Đất dự án)<br>
-                Dự án the trident city quảng nam (Đất dự án)<br>
-                Dự án golden city nghệ an (Đất dự án)<br>
-                Phân khu the eco point bình phước(Đất dự án)<br>
-                Rivus elie saab thủ đức(Căn hộ)<br>
-                One Central Saigon Quận 1(Căn hộ)<br>
-                Cardinal Court Quận 7(Căn hộ)<br>
-                Sunshine Horizon Quận 4(Căn hộ)
-            </div>
-        </ul>
-    </div>
-
-    <!-- Page 10-de2: Tạo page và gắn Menu (Đề 2) -->
-    <div class="page" id="pg-10-de2" data-branch="de2">
-        <div class="section-label">Tạo page và gắn Menu (Đề 2)</div>
-        <ul class="bullets">
-            <li>Bấm Appearance → chọn <strong>Menu</strong></li>
-            <img class="step-img" src="D5.png" alt="D5" loading="lazy">
-            <li>Chọn → <strong>create a new menu</strong> để tạo menu mới. Ở chỗ Menu Name đặt tên xong chọn →
-                <strong>Create Menu</strong>
-            </li>
-            <img class="step-img" src="D6.png" alt="D6" loading="lazy">
-            <li>Nhìn bên phải góc trên chọn → <strong>Screen Options</strong> chọn → <strong>Product
-                    Categories</strong></li>
-            <img class="step-img" src="D7.png" alt="D7" loading="lazy">
-            <li>Chọn → <strong>Product Categories</strong> chọn tab <strong>View All</strong> tích chọn tất cả và bỏ
-                chọn <strong>Uncategorized</strong> xong Add to menu</li>
-            <li>Sắp xếp cấu trúc như dưới</li>
-            <div class="code-block">
-                ├── Đất bán
-                │ ├── Đất dự án
-                │ │ ├── Dự án green city bình dương
-                │ │ ├── Dự án the trident city quảng nam
-                │ │ ├── Dự án golden city nghệ an
-                │ │ └── Phân khu the eco point bình phước
-                │ │
-                │ ├── Đất nền
-                │ │ ├── Đất nền TP Thủ đức
-                │ │ ├── Đất nền quận 1
-                │ │ ├── Đất nền quận Tân bình
-                │ │ └── Đất nền huyện Củ chi
-                │
-                ├── Căn hộ
-                │ ├── Rivus elie saab thủ đức
-                │ ├── One Central Saigon Quận 1
-                │ ├── Cardinal Court Quận 7
-                │ └── Sunshine Horizon Quận 4
-                │
-                ├── Giới thiệu
-                │ ├── Dự án đầu tư
-                │ ├── Lĩnh vực hoạt động
-                │ ├── Liên hệ
-                │ ├── Chi nhánh
-                │ ├── Chăm sóc khách hàng
-                │ │
-                ├── Blog
-            </div>
-        </ul>
-    </div>
-
-    <!-- Page 12-de2: UX Builder + Customize (Đề 2) - QR Unlock Logic -->
-    <div class="page" id="pg-12-de2" data-branch="de2">
-        <!-- QR Verification container on Phone -->
-        <div id="unlock-de2">
-            <div class="section-label">UX Builder + Customize</div>
+        <!-- Page 11-de2: Tạo Product (Đề 2) -->
+        <div class="page" id="pg-11-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="30">
+            <div class="section-label">Tạo Product (Đề 2)</div>
             <ul class="bullets">
-                <li>Truy cập trên Browser → <code><strong>edu.huynhtu.com</strong></code> → và bật Camera để xem</li>
-            </ul>
-            <div id="reader-de2" class="camera-reader-box"></div>
-            <div style="display: flex; justify-content: center; margin: 20px 0;">
-                <button class="btn primary" id="btn-scan-de2" onclick="startScanning('de2')" style="flex: 0 1 auto; min-width: 220px;">
-                    Cấp quyền truy cập Camera
-                </button>
-            </div>
-        </div>
-
-        <!-- Unlocked Tutorial Content -->
-        <div id="content-de2" style="display: none;">
-            <div class="part-label">Phần 1</div>
-            <div class="section-label">Chỉnh sửa UX Builder</div>
-            <ul class="bullets">
-                <li>Từ trang xem chọn edit bấm → <strong>Edit with UX Builder</strong></li>
-                <li>Bấm vào bánh răng cột bên trái → cuộn xuống → chọn <strong>Clear Content...</strong> nếu cần dọn
-                    layout cũ</li>
-                <li>Hover lên banner chính → click icon <strong>bút chì</strong> để chỉnh sửa</li>
-                <li>Tab <strong>Content</strong>: thay tiêu đề, đoạn mô tả, text nút bấm phù hợp tên công ty BĐS
+                <li>Ở trang quản trị chọn Product → <strong>Add New Product</strong></li>
+                <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
+                <li>Nhập tên bất động sản ở <strong>Product Title</strong> (VD: Đất nền TP Thủ Đức – 80m²)</li>
+                <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (vị trí, diện tích, pháp lý…)</li>
+                <img class="step-img" src="pr2.png" alt="pr2" loading="lazy">
+                <li>Phần <strong>Product Data</strong>: nhập <strong>Regular Price</strong> (giá bán) và <strong>Sale
+                        Price</strong> (giá bán ưu đãi)</li>
+                <img class="step-img" src="pr3.png" alt="pr3" loading="lazy">
+                <li>Upload <strong>Product Image</strong> (ảnh đại diện) + <strong>Product Gallery</strong> (ảnh bổ
+                    sung)</li>
+                <li>Góc phải chọn <strong>Product Categories</strong> đúng với danh mục đã tạo</li>
+                <img class="step-img" src="pr4.png" alt="pr4" loading="lazy">
+                <li>Bấm <strong>Publish</strong> để đăng sản phẩm</li>
+                <img class="step-img" src="pr5.png" alt="pr5" loading="lazy">
+                <li>Lặp lại – tạo tổng cộng <strong>ít nhất 12 sản phẩm</strong> thuộc 4 danh mục khác nhau gồm
+                    <code>Đất nền TP Thủ đức, Đất nền quận 1, Đất nền quận Tân bình, Đất nền huyện Củ chi</code>
                 </li>
-                <li>Tab <strong>Image / Background</strong>: chọn ảnh thực tế liên quan bất động sản</li>
-                <li>Chỉnh các section còn lại (featured products, banner phụ…) tương tự bằng icon bút chì</li>
-                <li>Góc trên bên phải bấm <strong>Save</strong> để lưu thay đổi</li>
             </ul>
-
-            <a class="video-card" href="LINK_VIDEO_UXB_DE2" target="_blank">
-                <div class="video-thumb-wrap">
-                    <img src="https://img.youtube.com/vi/default/hqdefault.jpg" alt="UX Builder thumbnail"
-                        onerror="this.style.display='none'">
-                    <div class="video-thumb-overlay">
-                        <div class="video-play-btn">▶</div>
-                    </div>
-                </div>
-                <div class="video-card-meta">
-                    <span class="yt-logo">▶</span>
-                    <div class="video-card-text">
-                        <span class="video-card-title">UX Builder – Chỉnh sửa trang chủ</span>
-                        <span class="video-card-sub">Xem video hướng dẫn trên YouTube</span>
-                    </div>
-                </div>
-            </a>
-
-            <hr class="sep">
-
-            <div class="part-label">Phần 2</div>
-            <div class="section-label">Tùy chỉnh giao diện – Customize</div>
-            <a class="video-card" href="https://www.youtube.com/watch?v=-esiEI4HTdk&list=RDzpRTKjqcNGM&index=5"
-                target="_blank">
-                <div class="video-thumb-wrap">
-                    <img src="https://img.youtube.com/vi/-esiEI4HTdk/hqdefault.jpg" alt="Customize thumbnail">
-                    <div class="video-thumb-overlay">
-                        <div class="video-play-btn">▶</div>
-                    </div>
-                </div>
-                <div class="video-card-meta">
-                    <span class="yt-logo">▶</span>
-                    <div class="video-card-text">
-                        <span class="video-card-title">Customize – Tùy chỉnh giao diện</span>
-                        <span class="video-card-sub">Xem video hướng dẫn trên YouTube</span>
-                    </div>
-                </div>
-            </a>
-            <div class="notice warn">Nhớ bấm <strong>Publish</strong> — chỉ Preview sẽ không lưu được thay đổi</div>
         </div>
-    </div>
 
-    <!-- Page 11-de2: Tạo Product (Đề 2) -->
-    <div class="page" id="pg-11-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="210">
-        <div class="section-label">Tạo Product (Đề 2)</div>
-        <ul class="bullets">
-            <li>Ở trang quản trị chọn Product → <strong>Add New Product</strong></li>
-            <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
-            <li>Nhập tên bất động sản ở <strong>Product Title</strong> (VD: Đất nền TP Thủ Đức – 80m²)</li>
-            <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (vị trí, diện tích, pháp lý…)</li>
-            <img class="step-img" src="pr2.png" alt="pr2" loading="lazy">
-            <li>Phần <strong>Product Data</strong>: nhập <strong>Regular Price</strong> (giá bán) và <strong>Sale
-                    Price</strong> (giá bán ưu đãi)</li>
-            <img class="step-img" src="pr3.png" alt="pr3" loading="lazy">
-            <li>Upload <strong>Product Image</strong> (ảnh đại diện) + <strong>Product Gallery</strong> (ảnh bổ
-                sung)</li>
-            <li>Góc phải chọn <strong>Product Categories</strong> đúng với danh mục đã tạo</li>
-            <img class="step-img" src="pr4.png" alt="pr4" loading="lazy">
-            <li>Bấm <strong>Publish</strong> để đăng sản phẩm</li>
-            <img class="step-img" src="pr5.png" alt="pr5" loading="lazy">
-            <li>Lặp lại – tạo tổng cộng <strong>ít nhất 12 sản phẩm</strong> thuộc 4 danh mục khác nhau gồm
-                <code>Đất nền TP Thủ đức, Đất nền quận 1, Đất nền quận Tân bình, Đất nền huyện Củ chi</code>
-            </li>
-        </ul>
-    </div>
+        <!-- Page 11: Backup Website -->
+        <div class="page" id="pg-11">
+            <div class="section-label">Backup Website</div>
+            <ul class="bullets">
+                <li>Ở trang quản trị chọn → <strong>Plugin</strong></li>
+                <img class="step-img" src="bk1.png" alt="bk1" loading="lazy">
+                <li>Bấm vào thanh search và gõ <strong>Duplicator</strong> và bấm <strong>Install Now</strong> sau đó
+                    chọn <strong>Activate</strong></li>
+                <img class="step-img" src="bk2.png" alt="bk2" loading="lazy">
+                <img class="step-img" src="bk3.png" alt="bk3" loading="lazy">
+                <img class="step-img" src="bk4.png" alt="bk4" loading="lazy">
+                <li>Bấm → <strong>Skip</strong></li>
+                <img class="step-img" src="bk5.png" alt="bk5" loading="lazy">
+                <li>Bấm → <strong>Create New</strong></li>
+                <img class="step-img" src="bk6.png" alt="bk6" loading="lazy">
+                <li>Bấm → <strong>Next</strong></li>
+                <img class="step-img" src="bk7.png" alt="bk7" loading="lazy">
+                <li>Bấm → <strong>Build</strong></li>
+                <img class="step-img" src="bk8.png" alt="bk8" loading="lazy">
+                <li>Bấm → <strong>Download Both Files</strong></li>
+                <img class="step-img" src="bk9.png" alt="bk9" loading="lazy">
+            </ul>
+        </div>
 
-    <!-- Page 11: Backup Website -->
-    <div class="page" id="pg-11">
-        <div class="section-label">Backup Website</div>
-        <ul class="bullets">
-            <li>Ở trang quản trị chọn → <strong>Plugin</strong></li>
-            <img class="step-img" src="bk1.png" alt="bk1" loading="lazy">
-            <li>Bấm vào thanh search và gõ <strong>Duplicator</strong> và bấm <strong>Install Now</strong> sau đó
-                chọn <strong>Activate</strong></li>
-            <img class="step-img" src="bk2.png" alt="bk2" loading="lazy">
-            <img class="step-img" src="bk3.png" alt="bk3" loading="lazy">
-            <img class="step-img" src="bk4.png" alt="bk4" loading="lazy">
-            <li>Bấm → <strong>Skip</strong></li>
-            <img class="step-img" src="bk5.png" alt="bk5" loading="lazy">
-            <li>Bấm → <strong>Create New</strong></li>
-            <img class="step-img" src="bk6.png" alt="bk6" loading="lazy">
-            <li>Bấm → <strong>Next</strong></li>
-            <img class="step-img" src="bk7.png" alt="bk7" loading="lazy">
-            <li>Bấm → <strong>Build</strong></li>
-            <img class="step-img" src="bk8.png" alt="bk8" loading="lazy">
-            <li>Bấm → <strong>Download Both Files</strong></li>
-            <img class="step-img" src="bk9.png" alt="bk9" loading="lazy">
-        </ul>
-    </div>
+        <!-- Page 12: Triển khai website lên Server -->
+        <div class="page" id="pg-12">
+            <div class="section-label">Triển khai website lên Server</div>
+            <ul class="bullets">
+                <li>Mở phần mềm <strong>WinSCP</strong> đăng nhập thông tin như phía dưới:</li>
+                <div class="code-block">
+                    Host name: 192.168.26.34
+                    User name: ftpuser
+                    Password: Aa123456</div>
+                <img class="step-img" src="bs1.png" alt="bs1" loading="lazy">
+                <li>Truy cập vào đường dẫn <code><strong>/opt/lampp/htdocs</strong></code> và vào đúng thư mục của sinh
+                    viên.</li>
+                <img class="step-img" src="bs2.png" alt="bs2" loading="lazy">
+                <li>Sau đó bỏ 2 file như ảnh dưới vào thư mục</li>
+                <img class="step-img" src="bs3.png" alt="bs3" loading="lazy">
+                <li>Truy cập trên google vào đường dẫn <code><strong>192.168.26.34</strong></code> và vào đúng thư mục
+                    của sinh viên.</li>
+                <li>Bấm → <strong>installer.php</strong></li>
+                <img class="step-img" src="bs4.png" alt="bs4" loading="lazy">
+                <li>Truy cập thêm trên google vào đường dẫn <code><strong>192.168.26.34/phpmyadmin</strong></code> bấm
+                    vào <strong>New / Mới</strong> và tạo database theo mã số thư mục của sinh viên.</li>
+                <img class="step-img" src="bs5.png" alt="bs5" loading="lazy">
+                <li>Sau đó quay lại trang <code><strong>192.168.26.34</strong></code> Điền vào các thông tin dưới và bấm
+                    → <strong>Validate</strong></li>
+                <img class="step-img" src="bs7.png" alt="bs7" loading="lazy">
+                <li>Tích vào ô dưới và bấm → <strong>Next</strong></li>
+                <img class="step-img" src="bs6.png" alt="bs6" loading="lazy">
+                <li>Chọn → <strong>OK</strong></li>
+                <img class="step-img" src="bs8.png" alt="bs8" loading="lazy">
+            </ul>
+        </div>
 
-    <!-- Page 12: Triển khai website lên Server -->
-    <div class="page" id="pg-12">
-        <div class="section-label">Triển khai website lên Server</div>
-        <ul class="bullets">
-            <li>Mở phần mềm <strong>WinSCP</strong> đăng nhập thông tin như phía dưới:</li>
-            <div class="code-block">
-                Host name: 192.168.26.34
-                User name: ftpuser
-                Password: Aa123456</div>
-            <img class="step-img" src="bs1.png" alt="bs1" loading="lazy">
-            <li>Truy cập vào đường dẫn <code><strong>/opt/lampp/htdocs</strong></code> và vào đúng thư mục của sinh
-                viên.</li>
-            <img class="step-img" src="bs2.png" alt="bs2" loading="lazy">
-            <li>Sau đó bỏ 2 file như ảnh dưới vào thư mục</li>
-            <img class="step-img" src="bs3.png" alt="bs3" loading="lazy">
-            <li>Truy cập trên google vào đường dẫn <code><strong>192.168.26.34</strong></code> và vào đúng thư mục
-                của sinh viên.</li>
-            <li>Bấm → <strong>installer.php</strong></li>
-            <img class="step-img" src="bs4.png" alt="bs4" loading="lazy">
-            <li>Truy cập thêm trên google vào đường dẫn <code><strong>192.168.26.34/phpmyadmin</strong></code> bấm
-                vào <strong>New / Mới</strong> và tạo database theo mã số thư mục của sinh viên.</li>
-            <img class="step-img" src="bs5.png" alt="bs5" loading="lazy">
-            <li>Sau đó quay lại trang <code><strong>192.168.26.34</strong></code> Điền vào các thông tin dưới và bấm
-                → <strong>Validate</strong></li>
-            <img class="step-img" src="bs7.png" alt="bs7" loading="lazy">
-            <li>Tích vào ô dưới và bấm → <strong>Next</strong></li>
-            <img class="step-img" src="bs6.png" alt="bs6" loading="lazy">
-            <li>Chọn → <strong>OK</strong></li>
-            <img class="step-img" src="bs8.png" alt="bs8" loading="lazy">
-        </ul>
-    </div>
-
-    <!-- Navigation Buttons -->
-    <div class="nav-btns">
-        <button class="btn" id="btn-prev" onclick="handleMove(-1)" disabled>← Quay lại</button>
-        <button class="btn primary" id="btn-next" onclick="handleMove(1)">Tiếp tục →</button>
-    </div>
+        <!-- Navigation Buttons -->
+        <div class="nav-btns">
+            <button class="btn" id="btn-prev" onclick="handleMove(-1)" disabled>← Quay lại</button>
+            <button class="btn primary" id="btn-next" onclick="handleMove(1)">Tiếp tục →</button>
+        </div>
 
     </div>
 
     <script>
+        // Chống mở Developer Tools (F12, chuột phải, Ctrl+Shift+I, v.v...)
+        (function () {
+            document.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (
+                    e.key === 'F12' ||
+                    e.keyCode === 123 ||
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.keyCode === 73)) ||
+                    (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.keyCode === 74)) ||
+                    (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.keyCode === 67)) ||
+                    (e.ctrlKey && (e.key === 'U' || e.keyCode === 85))
+                ) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Sử dụng debugger liên tục để đóng băng khi DevTools được mở
+            const threshold = 100;
+            setInterval(function () {
+                const start = performance.now();
+                debugger;
+                const end = performance.now();
+                if (end - start > threshold) {
+                    document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;font-size:18px;font-weight:bold;color:#ff3333;text-align:center;padding:20px;">Vui lòng tắt Developer Tools để tiếp tục sử dụng trang web!</div>';
+                }
+            }, 500);
+        })();
+
         const pages = Array.from(document.querySelectorAll('.app .page'));
 
         let currentIdx = parseInt(localStorage.getItem('wp_currentIdx')) || 0;
@@ -1449,7 +1443,7 @@
                 const isTimerDone = localStorage.getItem(`wp_timer_done_${currentPage.id}`);
 
                 if (!isTimerDone) {
-                    const countdownSeconds = parseInt(currentPage.getAttribute('data-countdown-seconds')) || 180;
+                    const countdownSeconds = parseInt(currentPage.getAttribute('data-countdown-seconds')) || 30;
                     const savedTime = localStorage.getItem(`wp_remaining_time_${currentPage.id}`);
                     if (savedTime !== null) {
                         remainingTime = parseInt(savedTime);
