@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hướng Dẫn WordPress</title>
+    <title>WordPress</title>
 
     <!-- Google Fonts: Be Vietnam Pro (hỗ trợ tiếng Việt) & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,11 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- QRCode Generator Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-    <!-- HTML5 QRCode Scanning Library -->
-    <script src="https://unpkg.com/html5-qrcode"></script>
 
     <style>
         :root {
@@ -50,115 +46,114 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Responsive Desktop warning */
+        /* Responsive Desktop warning — controlled by JS via screen.width (not viewport) */
         .desktop-msg {
             display: none;
         }
 
-        @media (min-width: 768px) {
-            .desktop-msg {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-                background: var(--bg-dk);
-                color: var(--bg);
-                text-align: center;
-                padding: 2rem 2rem;
-                position: relative;
-                overflow: hidden;
-                gap: 0;
-            }
+        /* Desktop styles applied by JS when screen.width >= 768 */
+        body.is-desktop .desktop-msg {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--bg-dk);
+            color: var(--bg);
+            text-align: center;
+            padding: 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            gap: 0;
+        }
 
-            /* Faint decorative background grid similar to huynhtu.com */
-            .desktop-msg::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background-image: linear-gradient(rgba(93, 202, 165, .02) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(93, 202, 165, .02) 1px, transparent 1px);
-                background-size: 40px 40px;
-                pointer-events: none;
-            }
+        body.is-desktop .desktop-msg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(93, 202, 165, .02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(93, 202, 165, .02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
 
-            .desktop-qr-container {
-                display: flex;
-                gap: 2.5rem;
-                margin-bottom: 1.5rem;
-                z-index: 1;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        body.is-desktop .desktop-qr-container {
+            display: flex;
+            gap: 2.5rem;
+            margin-bottom: 1.5rem;
+            z-index: 1;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-            .desktop-qr-box {
-                background: #fff;
-                padding: 1.25rem;
-                border-radius: 16px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0.8rem;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                transition: transform 0.25s ease;
-            }
+        body.is-desktop .desktop-qr-box {
+            background: #fff;
+            padding: 1.25rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.25s ease;
+        }
 
-            .desktop-qr-box:hover {
-                transform: translateY(-5px);
-            }
+        body.is-desktop .desktop-qr-box:hover {
+            transform: translateY(-5px);
+        }
 
-            .desktop-qr-box span {
-                font-family: var(--mono);
-                font-size: 0.72rem;
-                color: var(--ink);
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-            }
+        body.is-desktop .desktop-qr-box span {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--ink);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-            .desktop-msg h2 {
-                font-size: 1.6rem;
-                font-weight: 700;
-                letter-spacing: -0.02em;
-                margin-bottom: 0.4rem;
-                z-index: 1;
-            }
+        body.is-desktop .desktop-msg h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
+            z-index: 1;
+        }
 
-            .desktop-msg p {
-                font-size: 1rem;
-                color: var(--ink-3);
-                max-width: 50ch;
-                margin-bottom: 1.5rem;
-                z-index: 1;
-            }
+        body.is-desktop .desktop-msg p {
+            font-size: 1rem;
+            color: var(--ink-3);
+            max-width: 50ch;
+            margin-bottom: 1.5rem;
+            z-index: 1;
+        }
 
-            .btn-download {
-                display: inline-flex;
-                align-items: center;
-                gap: 10px;
-                padding: 14px 32px;
-                background: var(--teal);
-                color: #fff;
-                font-size: 0.95rem;
-                font-weight: 600;
-                border-radius: 10px;
-                text-decoration: none;
-                transition: all 0.2s;
-                z-index: 1;
-                box-shadow: 0 4px 12px rgba(15, 110, 86, 0.25);
-            }
+        body.is-desktop .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: var(--teal);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s;
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(15, 110, 86, 0.25);
+        }
 
-            .btn-download:hover {
-                background: var(--teal-lt);
-                color: var(--ink);
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(93, 202, 165, 0.35);
-            }
+        body.is-desktop .btn-download:hover {
+            background: var(--teal-lt);
+            color: var(--ink);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(93, 202, 165, 0.35);
+        }
 
-            .app {
-                display: none !important;
-            }
+        body.is-desktop .app,
+        body.is-desktop .nav-btns {
+            display: none !important;
         }
 
         .app {
@@ -503,122 +498,7 @@
             pointer-events: none;
         }
 
-        /* Interactive QR Scanner UI inside mobile app */
-        .qr-unlock-wrapper {
-            background: #fff;
-            border: 1.5px solid var(--b2);
-            border-radius: 16px;
-            padding: 24px 20px;
-            text-align: center;
-            margin: 20px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-        }
 
-        .qr-scanner-frame {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px;
-            border: 2px dashed var(--teal);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: var(--bg);
-        }
-
-        /* Dynamic laser scanner animation line */
-        .scanner-laser {
-            position: absolute;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--teal-lt);
-            box-shadow: 0 0 10px var(--teal-lt);
-            animation: scanning 2s linear infinite;
-        }
-
-        @keyframes scanning {
-            0% {
-                top: 0%;
-            }
-
-            50% {
-                top: 100%;
-            }
-
-            100% {
-                top: 0%;
-            }
-        }
-
-        .qr-unlock-wrapper h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .qr-unlock-wrapper p {
-            font-size: 13.5px;
-            color: var(--ink-2);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        /* Live Camera Scanner Element */
-        .camera-reader-box {
-            display: none;
-            width: 100%;
-            max-width: 280px;
-            margin: 15px auto;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 3px solid var(--ink);
-            background: #000;
-        }
-
-        .manual-unlock {
-            margin-top: 24px;
-            padding-top: 18px;
-            border-top: 1px solid var(--b1);
-            text-align: left;
-        }
-
-        .manual-unlock span {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--ink-2);
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .manual-input-row {
-            display: flex;
-            gap: 8px;
-        }
-
-        .manual-input-row input {
-            flex: 1;
-            padding: 10px 12px;
-            border: 1.5px solid var(--b2);
-            border-radius: 8px;
-            font-family: var(--sans);
-            font-size: 14px;
-            color: var(--ink);
-            background: var(--bg);
-        }
-
-        .manual-input-row input:focus {
-            border-color: var(--teal);
-            outline: none;
-        }
-
-        .manual-input-row .btn {
-            flex: 0 0 90px;
-            padding: 8px;
-            font-size: 13px;
-        }
     </style>
 </head>
 
@@ -912,35 +792,42 @@
             </ul>
         </div>
 
-        <!-- Page 11-de1: UX Builder + Customize (Đề 1) - QR Unlock Logic -->
+        <!-- Page 11-de1: UX Builder + Customize (Đề 1) -->
         <div class="page" id="pg-11-de1" data-branch="de1">
-            <!-- QR Verification container on Phone -->
-            <div id="unlock-de1">
+            <div>
                 <div class="section-label">UX Builder + Customize(Đề 1)</div>
                 <ul class="bullets">
                     <li>Ở trang giao diện chọn <strong>Store Comming Soon</strong></li>
                     <img class="step-img" src="ux2.png" alt="ux2" loading="lazy">
-                    <li>Nhấn <strong> Live</strong> bấm Save Changes</li>
+                    <li>Nhấn <strong>Live</strong> bấm Save Changes</li>
                     <img class="step-img" src="ux3.png" alt="ux3" loading="lazy">
                     <li>Quay giao diện chọn <strong>Edit With UX Builder</strong></li>
                     <img class="step-img" src="ux1.png" alt="ux1" loading="lazy">
                     <li>Chỉnh sửa Slider Bar</li>
                     <img class="step-img" src="ux4.png" alt="ux4" loading="lazy">
-                    <li> Chỉnh sửa ô nào chọn ô đó và Chọn <strong>Changes media</strong></li>
+                    <li>Chỉnh sửa ô nào chọn ô đó và chọn <strong>Changes media</strong></li>
                     <img class="step-img" src="ux5.png" alt="ux5" loading="lazy">
                     <li>Upload ảnh lên chọn <strong>Use this image</strong></li>
                     <img class="step-img" src="ux6.png" alt="ux6" loading="lazy">
                     <li>Bấm vào <strong>Text</strong> chọn open text editor</li>
                     <img class="step-img" src="ux7.png" alt="ux7" loading="lazy">
-                    <li>Chỉnh sửa nội dung phù hợp r bấm <strong>OK</strong></li>
+                    <li>Chỉnh sửa nội dung phù hợp rồi bấm <strong>OK</strong></li>
                     <img class="step-img" src="ux8.png" alt="ux8" loading="lazy">
-                    <li>Hoàn thành tất cả 5 Banner </li>
-                    <img class="step-img" src="ux10.png" alt="ux10" loading="lazy">
-                    <li> Sau đó chọn phần <strong>Products Catagories</strong></li>
+                    <li>Bấm vào <strong>Product</strong> chọn các danh mục sản phẩm đã tạo muốn hiện</li>
+                    <img class="step-img" src="fc.png" alt="fc" loading="lazy">
+                    <li>Sau đó chọn phần <strong>Products Catagories</strong></li>
                     <img class="step-img" src="ux9.png" alt="ux9" loading="lazy">
-                    <li>Chọn các danh mục trước đó đã tạo có Thumbnail và thêm vào <strong>Agree and
-                            Continue</strong> → bấm tiếp <strong>View your new website!</strong></li>
-                    <img class="step-img" src="f8.png" alt="f8" loading="lazy">
+                    <li>Chọn các danh mục trước đó đã tạo có Thumbnail và thêm vào bao gồm:</li>
+                    <div class="code-block">
+                        <strong>Bàn làm việc, Bộ Bàn ăn, Phòng khách, Đèn trang trí, Giường ngủ</strong>
+                    </div>
+                    <img class="step-img" src="ux11.png" alt="ux11" loading="lazy">
+                    <li>Quay lại trang giao diện chọn <strong>Customize</strong></li>
+                    <img class="step-img" src="ux13.png" alt="ux13" loading="lazy">
+                    <li>Chọn <strong>Footer</strong></li>
+                    <img class="step-img" src="ux14.png" alt="ux14" loading="lazy">
+                    <li>Cuộn xuống Absolute Footer và thay chữ <strong>Flatsome Theme</strong> bằng tên của mình</li>
+                    <img class="step-img" src="ux15.png" alt="ux15" loading="lazy">
                 </ul>
             </div>
         </div>
@@ -949,7 +836,11 @@
         <div class="page" id="pg-10-de1" data-branch="de1" data-countdown="true" data-countdown-seconds="30">
             <div class="section-label">Tạo Product</div>
             <ul class="bullets">
-                <li>Ở trang quản trị chọn Product → <strong>Add New Product</strong></li>
+                <li>Ở trang quản trị chọn Product → <strong>All Product</strong> chọn Move to Trash</li>
+                <img class="step-img" src="prs.png" alt="prs" loading="lazy">
+                <li>Tích All và chọn → <strong>Apply</strong></li>
+                <img class="step-img" src="prf.png" alt="prf" loading="lazy">
+                <li>Chọn Product → <strong>Add New Product</strong></li>
                 <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
                 <li>Nhập tên sản phẩm nội thất ở <strong>Product Title</strong> (VD: Giường ngủ gỗ Sồi)</li>
                 <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (Kích thước, Chất liệu...)</li>
@@ -1095,199 +986,229 @@
             </ul>
         </div>
 
-        <!-- Page 12-de2: UX Builder + Customize (Đề 2) - QR Unlock Logic -->
+        <!-- Page 12-de2: UX Builder + Customize (Đề 2) -->
         <div class="page" id="pg-12-de2" data-branch="de2">
-            <!-- QR Verification container on Phone -->
-            <div id="unlock-de2">
-                <div class="section-label">UX Builder + Customize</div>
+            <div>
+                <div class="section-label">UX Builder + Customize(Đề 2)</div>
                 <ul class="bullets">
-                    <li>Truy cập trên Browser → <code><strong>fl.huynhtu.com</strong></code> → và bật Camera để xem</li>
+                    <li>Ở trang giao diện chọn <strong>Store Comming Soon</strong></li>
+                    <img class="step-img" src="ux2.png" alt="ux2" loading="lazy">
+                    <li>Nhấn <strong>Live</strong> bấm Save Changes</li>
+                    <img class="step-img" src="ux3.png" alt="ux3" loading="lazy">
+                    <li>Quay giao diện chọn <strong>Edit With UX Builder</strong></li>
+                    <img class="step-img" src="ux1.png" alt="ux1" loading="lazy">
+                    <li>Chỉnh sửa Slider Bar</li>
+                    <img class="step-img" src="vs.png" alt="vs" loading="lazy">
+                    <li>Chỉnh sửa ô nào chọn ô đó và chọn <strong>Changes media</strong></li>
+                    <img class="step-img" src="bux.png" alt="bux" loading="lazy">
+                    <li>Upload ảnh lên chọn <strong>Use this image</strong></li>
+                    <img class="step-img" src="ux6.png" alt="ux6" loading="lazy">
+                    <li>Bấm vào <strong>Text</strong> chọn open text editor</li>
+                    <img class="step-img" src="ux7.png" alt="ux7" loading="lazy">
+                    <li>Chỉnh sửa nội dung phù hợp rồi bấm <strong>OK</strong></li>
+                    <img class="step-img" src="ux8.png" alt="ux8" loading="lazy">
+                    <li>Hoàn thành tất cả 3 Banner</li>
+                    <li>Bấm vào <strong>Product</strong> chọn các danh mục sản phẩm đã tạo muốn hiện</li>
+                    <img class="step-img" src="fc.png" alt="fc" loading="lazy">
+                    <li>Bấm vào <strong>Countdown</strong> để chỉnh đếm ngược</li>
+                    <li>Chỉnh sửa đếm ngược lần lượt là 2026 , 07, 18, 6:00 <strong>OK</strong></li>
+                    <img class="step-img" src="cout.png" alt="cout" loading="lazy">
+                    <li>Sau đó chọn phần <strong>Products Catagories</strong></li>
+                    <img class="step-img" src="ux9.png" alt="ux9" loading="lazy">
+                    <li>Chọn các danh mục trước đó đã tạo có Thumbnail và thêm vào bao gồm:</li>
+                    <div class="code-block">
+                        <strong>Căn hộ chung cư, Đất dự án, Đất nền, Nhà mặt phố</strong>
+                    </div>
+                    <img class="step-img" src="ux11.png" alt="ux11" loading="lazy">
+                    <li>Quay lại trang giao diện chọn <strong>Customize</strong></li>
+                    <img class="step-img" src="ux13.png" alt="ux13" loading="lazy">
+                    <li>Chọn <strong>Footer</strong></li>
+                    <img class="step-img" src="ux14.png" alt="ux14" loading="lazy">
+                    <li>Cuộn xuống Absolute Footer và thay chữ <strong>Flatsome Theme</strong> bằng tên của mình</li>
+                    <img class="step-img" src="ux15.png" alt="ux15" loading="lazy">
                 </ul>
-                <div id="reader-de2" class="camera-reader-box"></div>
-                <div style="display: flex; justify-content: center; margin: 20px 0;">
-                    <button class="btn primary" id="btn-scan-de2" onclick="startScanning('de2')"
-                        style="flex: 0 1 auto; min-width: 220px;">
-                        Cấp quyền truy cập Camera
-                    </button>
-                </div>
-            </div>
-
-            <!-- Unlocked Tutorial Content -->
-            <div id="content-de2" style="display: none;">
-                <div class="part-label">Phần 1</div>
-                <div class="section-label">Chỉnh sửa UX Builder</div>
-                <ul class="bullets">
-                    <li>Từ trang xem chọn edit bấm → <strong>Edit with UX Builder</strong></li>
-                    <li>Bấm vào bánh răng cột bên trái → cuộn xuống → chọn <strong>Clear Content...</strong> nếu cần dọn
-                        layout cũ</li>
-                    <li>Hover lên banner chính → click icon <strong>bút chì</strong> để chỉnh sửa</li>
-                    <li>Tab <strong>Content</strong>: thay tiêu đề, đoạn mô tả, text nút bấm phù hợp tên công ty BĐS
-                    </li>
-                    <li>Tab <strong>Image / Background</strong>: chọn ảnh thực tế liên quan bất động sản</li>
-                    <li>Chỉnh các section còn lại (featured products, banner phụ…) tương tự bằng icon bút chì</li>
-                    <li>Góc trên bên phải bấm <strong>Save</strong> để lưu thay đổi</li>
-                </ul>
-
-                <a class="video-card" href="LINK_VIDEO_UXB_DE2" target="_blank">
-                    <div class="video-thumb-wrap">
-                        <img src="https://img.youtube.com/vi/default/hqdefault.jpg" alt="UX Builder thumbnail"
-                            onerror="this.style.display='none'">
-                        <div class="video-thumb-overlay">
-                            <div class="video-play-btn">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-card-meta">
-                        <span class="yt-logo">▶</span>
-                        <div class="video-card-text">
-                            <span class="video-card-title">UX Builder – Chỉnh sửa trang chủ</span>
-                            <span class="video-card-sub">Xem video hướng dẫn trên YouTube</span>
-                        </div>
-                    </div>
-                </a>
-
-                <hr class="sep">
-
-                <div class="part-label">Phần 2</div>
-                <div class="section-label">Tùy chỉnh giao diện – Customize</div>
-                <a class="video-card" href="https://www.youtube.com/watch?v=-esiEI4HTdk&list=RDzpRTKjqcNGM&index=5"
-                    target="_blank">
-                    <div class="video-thumb-wrap">
-                        <img src="https://img.youtube.com/vi/-esiEI4HTdk/hqdefault.jpg" alt="Customize thumbnail">
-                        <div class="video-thumb-overlay">
-                            <div class="video-play-btn">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-card-meta">
-                        <span class="yt-logo">▶</span>
-                        <div class="video-card-text">
-                            <span class="video-card-title">Customize – Tùy chỉnh giao diện</span>
-                            <span class="video-card-sub">Xem video hướng dẫn trên YouTube</span>
-                        </div>
-                    </div>
-                </a>
-                <div class="notice warn">Nhớ bấm <strong>Publish</strong> — chỉ Preview sẽ không lưu được thay đổi</div>
             </div>
         </div>
+    <!-- Unlocked Tutorial Content -->
 
-        <!-- Page 11-de2: Tạo Product (Đề 2) -->
-        <div class="page" id="pg-11-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="30">
-            <div class="section-label">Tạo Product (Đề 2)</div>
-            <ul class="bullets">
-                <li>Ở trang quản trị chọn Product → <strong>Add New Product</strong></li>
-                <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
-                <li>Nhập tên bất động sản ở <strong>Product Title</strong> (VD: Đất nền TP Thủ Đức – 80m²)</li>
-                <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (vị trí, diện tích, pháp lý…)</li>
-                <img class="step-img" src="pr2.png" alt="pr2" loading="lazy">
-                <li>Phần <strong>Product Data</strong>: nhập <strong>Regular Price</strong> (giá bán) và <strong>Sale
-                        Price</strong> (giá bán ưu đãi)</li>
-                <img class="step-img" src="pr3.png" alt="pr3" loading="lazy">
-                <li>Upload <strong>Product Image</strong> (ảnh đại diện) + <strong>Product Gallery</strong> (ảnh bổ
-                    sung)</li>
-                <li>Góc phải chọn <strong>Product Categories</strong> đúng với danh mục đã tạo</li>
-                <img class="step-img" src="pr4.png" alt="pr4" loading="lazy">
-                <li>Bấm <strong>Publish</strong> để đăng sản phẩm</li>
-                <img class="step-img" src="pr5.png" alt="pr5" loading="lazy">
-                <li>Lặp lại – tạo tổng cộng <strong>ít nhất 12 sản phẩm</strong> thuộc 4 danh mục khác nhau gồm
-                    <code>Đất nền TP Thủ đức, Đất nền quận 1, Đất nền quận Tân bình, Đất nền huyện Củ chi</code>
-                </li>
-            </ul>
-        </div>
+    <!-- Page 11-de2: Tạo Product (Đề 2) -->
+    <div class="page" id="pg-11-de2" data-branch="de2" data-countdown="true" data-countdown-seconds="30">
+        <div class="section-label">Tạo Product (Đề 2)</div>
+        <ul class="bullets">
+            <li>Ở trang quản trị chọn Product → <strong>All Product</strong> chọn Move to Trash</li>
+            <img class="step-img" src="prs.png" alt="prs" loading="lazy">
+            <li>tích All và chọn → <strong>Apply</strong></li>
+            <img class="step-img" src="prf.png" alt="prf" loading="lazy">
+            <li>Chọn Product → <strong>Add New Product</strong></li>
+            <img class="step-img" src="pr1.png" alt="pr1" loading="lazy">
+            <li>Nhập tên bất động sản ở <strong>Product Title</strong> (VD: Đất nền TP Thủ Đức – 80m²)</li>
+            <li>Nhập mô tả chi tiết vào phần <strong>Description</strong> (vị trí, diện tích, pháp lý…)</li>
+            <img class="step-img" src="pr2.png" alt="pr2" loading="lazy">
+            <li>Phần <strong>Product Data</strong>: nhập <strong>Regular Price</strong> (giá bán) và <strong>Sale
+                    Price</strong> (giá bán ưu đãi)</li>
+            <img class="step-img" src="pr3.png" alt="pr3" loading="lazy">
+            <li>Upload <strong>Product Image</strong> (ảnh đại diện) + <strong>Product Gallery</strong> (ảnh bổ
+                sung)</li>
+            <li>Góc phải chọn <strong>Product Categories</strong> đúng với danh mục đã tạo</li>
+            <img class="step-img" src="pr4.png" alt="pr4" loading="lazy">
+            <li>Bấm <strong>Publish</strong> để đăng sản phẩm</li>
+            <img class="step-img" src="pr5.png" alt="pr5" loading="lazy">
+            <li>Lặp lại – tạo tổng cộng <strong>ít nhất 12 sản phẩm</strong> thuộc 4 danh mục khác nhau gồm
+                <code>Đất nền TP Thủ đức, Đất nền quận 1, Đất nền quận Tân bình, Đất nền huyện Củ chi</code>
+            </li>
+        </ul>
+    </div>
 
-        <!-- Page 11: Backup Website -->
-        <div class="page" id="pg-11">
-            <div class="section-label">Backup Website</div>
-            <ul class="bullets">
-                <li>Ở trang quản trị chọn → <strong>Plugin</strong></li>
-                <img class="step-img" src="bk1.png" alt="bk1" loading="lazy">
-                <li>Bấm vào thanh search và gõ <strong>Duplicator</strong> và bấm <strong>Install Now</strong> sau đó
-                    chọn <strong>Activate</strong></li>
-                <img class="step-img" src="bk2.png" alt="bk2" loading="lazy">
-                <img class="step-img" src="bk3.png" alt="bk3" loading="lazy">
-                <img class="step-img" src="bk4.png" alt="bk4" loading="lazy">
-                <li>Bấm → <strong>Skip</strong></li>
-                <img class="step-img" src="bk5.png" alt="bk5" loading="lazy">
-                <li>Bấm → <strong>Create New</strong></li>
-                <img class="step-img" src="bk6.png" alt="bk6" loading="lazy">
-                <li>Bấm → <strong>Next</strong></li>
-                <img class="step-img" src="bk7.png" alt="bk7" loading="lazy">
-                <li>Bấm → <strong>Build</strong></li>
-                <img class="step-img" src="bk8.png" alt="bk8" loading="lazy">
-                <li>Bấm → <strong>Download Both Files</strong></li>
-                <img class="step-img" src="bk9.png" alt="bk9" loading="lazy">
-            </ul>
-        </div>
+    <!-- Page 11: Backup Website -->
+    <div class="page" id="pg-11">
+        <div class="section-label">Backup Website</div>
+        <ul class="bullets">
+            <li>Ở trang quản trị chọn → <strong>Plugin</strong></li>
+            <img class="step-img" src="bk1.png" alt="bk1" loading="lazy">
+            <li>Bấm vào thanh search và gõ <strong>Duplicator</strong> và bấm <strong>Install Now</strong> sau đó
+                chọn <strong>Activate</strong></li>
+            <img class="step-img" src="bk2.png" alt="bk2" loading="lazy">
+            <img class="step-img" src="bk3.png" alt="bk3" loading="lazy">
+            <img class="step-img" src="bk4.png" alt="bk4" loading="lazy">
+            <li>Bấm → <strong>Skip</strong></li>
+            <img class="step-img" src="bk5.png" alt="bk5" loading="lazy">
+            <li>Bấm → <strong>Create New</strong></li>
+            <img class="step-img" src="bk6.png" alt="bk6" loading="lazy">
+            <li>Bấm → <strong>Next</strong></li>
+            <img class="step-img" src="bk7.png" alt="bk7" loading="lazy">
+            <li>Bấm → <strong>Build</strong></li>
+            <img class="step-img" src="bk8.png" alt="bk8" loading="lazy">
+            <li>Bấm → <strong>Download Both Files</strong></li>
+            <img class="step-img" src="bk9.png" alt="bk9" loading="lazy">
+        </ul>
+    </div>
 
-        <!-- Page 12: Triển khai website lên Server -->
-        <div class="page" id="pg-12">
-            <div class="section-label">Triển khai website lên Server</div>
-            <ul class="bullets">
-                <li>Mở phần mềm <strong>WinSCP</strong> đăng nhập thông tin như phía dưới:</li>
-                <div class="code-block">
-                    Host name: 192.168.26.34
-                    User name: ftpuser
-                    Password: Aa123456</div>
-                <img class="step-img" src="bs1.png" alt="bs1" loading="lazy">
-                <li>Truy cập vào đường dẫn <code><strong>/opt/lampp/htdocs</strong></code> và vào đúng thư mục của sinh
-                    viên.</li>
-                <img class="step-img" src="bs2.png" alt="bs2" loading="lazy">
-                <li>Sau đó bỏ 2 file như ảnh dưới vào thư mục</li>
-                <img class="step-img" src="bs3.png" alt="bs3" loading="lazy">
-                <li>Truy cập trên google vào đường dẫn <code><strong>192.168.26.34</strong></code> và vào đúng thư mục
-                    của sinh viên.</li>
-                <li>Bấm → <strong>installer.php</strong></li>
-                <img class="step-img" src="bs4.png" alt="bs4" loading="lazy">
-                <li>Truy cập thêm trên google vào đường dẫn <code><strong>192.168.26.34/phpmyadmin</strong></code> bấm
-                    vào <strong>New / Mới</strong> và tạo database theo mã số thư mục của sinh viên.</li>
-                <img class="step-img" src="bs5.png" alt="bs5" loading="lazy">
-                <li>Sau đó quay lại trang <code><strong>192.168.26.34</strong></code> Điền vào các thông tin dưới và bấm
-                    → <strong>Validate</strong></li>
-                <img class="step-img" src="bs7.png" alt="bs7" loading="lazy">
-                <li>Tích vào ô dưới và bấm → <strong>Next</strong></li>
-                <img class="step-img" src="bs6.png" alt="bs6" loading="lazy">
-                <li>Chọn → <strong>OK</strong></li>
-                <img class="step-img" src="bs8.png" alt="bs8" loading="lazy">
-            </ul>
-        </div>
+    <!-- Page 12: Triển khai website lên Server -->
+    <div class="page" id="pg-12">
+        <div class="section-label">Triển khai website lên Server</div>
+        <ul class="bullets">
+            <li>Mở phần mềm <strong>WinSCP</strong> đăng nhập thông tin như phía dưới:</li>
+            <div class="code-block">
+                Host name: 192.168.26.34
+                User name: ftpuser
+                Password: Aa123456</div>
+            <img class="step-img" src="bs1.png" alt="bs1" loading="lazy">
+            <li>Truy cập vào đường dẫn <code><strong>/opt/lampp/htdocs</strong></code> và vào đúng thư mục của sinh
+                viên.</li>
+            <img class="step-img" src="bs2.png" alt="bs2" loading="lazy">
+            <li>Sau đó bỏ 2 file như ảnh dưới vào thư mục</li>
+            <img class="step-img" src="bs3.png" alt="bs3" loading="lazy">
+            <li>Truy cập trên google vào đường dẫn <code><strong>192.168.26.34</strong></code> và vào đúng thư mục
+                của sinh viên.</li>
+            <li>Bấm → <strong>installer.php</strong></li>
+            <img class="step-img" src="bs4.png" alt="bs4" loading="lazy">
+            <li>Truy cập thêm trên google vào đường dẫn <code><strong>192.168.26.34/phpmyadmin</strong></code> bấm
+                vào <strong>New / Mới</strong> và tạo database theo mã số thư mục của sinh viên.</li>
+            <img class="step-img" src="bs5.png" alt="bs5" loading="lazy">
+            <li>Sau đó quay lại trang <code><strong>192.168.26.34</strong></code> Điền vào các thông tin dưới và bấm
+                → <strong>Validate</strong></li>
+            <img class="step-img" src="bs7.png" alt="bs7" loading="lazy">
+            <li>Tích vào ô dưới và bấm → <strong>Next</strong></li>
+            <img class="step-img" src="bs6.png" alt="bs6" loading="lazy">
+            <li>Chọn → <strong>OK</strong></li>
+            <img class="step-img" src="bs8.png" alt="bs8" loading="lazy">
+        </ul>
+    </div>
 
-        <!-- Navigation Buttons -->
-        <div class="nav-btns">
-            <button class="btn" id="btn-prev" onclick="handleMove(-1)" disabled>← Quay lại</button>
-            <button class="btn primary" id="btn-next" onclick="handleMove(1)">Tiếp tục →</button>
-        </div>
+    <!-- Navigation Buttons -->
+    <div class="nav-btns">
+        <button class="btn" id="btn-prev" onclick="handleMove(-1)" disabled>← Quay lại</button>
+        <button class="btn primary" id="btn-next" onclick="handleMove(1)">Tiếp tục →</button>
+    </div>
 
     </div>
 
     <script>
         // Chống mở Developer Tools (F12, chuột phải, Ctrl+Shift+I, v.v...)
         (function () {
-            document.addEventListener('contextmenu', function (e) {
-                e.preventDefault();
-            });
+            // ══════════════════════════════════════════════════════
+            // ★★ PHÍM BÍ MẬT MỞ DEVTOOLS (chỉ giáo viên biết) ★★
+            //    Nhấn:  Ctrl + Alt + Shift + 8
+            //    Sau khi nhấn → F12 và tất cả phím khác hoạt động bình thường
+            // ══════════════════════════════════════════════════════
+            let _devUnlocked = false;
+
             document.addEventListener('keydown', function (e) {
-                if (
-                    e.key === 'F12' ||
-                    e.keyCode === 123 ||
-                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.keyCode === 73)) ||
-                    (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.keyCode === 74)) ||
-                    (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.keyCode === 67)) ||
-                    (e.ctrlKey && (e.key === 'U' || e.keyCode === 85))
-                ) {
+                // Kiểm tra tổ hợp phím bí mật: Ctrl+Alt+Shift+8
+                if ((e.ctrlKey || e.metaKey) && e.altKey && e.shiftKey &&
+                    (e.key === '8' || e.keyCode === 56)) {
+                    _devUnlocked = true;
+                    console.clear();
+                    console.log('%c✅ DevTools đã được mở khóa bởi giáo viên', 'color:green;font-size:16px;font-weight:bold');
+                    return;
+                }
+
+                // Nếu đã unlock → cho qua hết
+                if (_devUnlocked) return;
+
+                const ctrl = e.ctrlKey || e.metaKey;
+                const shift = e.shiftKey;
+                const k = e.keyCode;
+                const key = (e.key || '').toLowerCase();
+
+                const fKeyBlock =
+                    e.key === 'F12' || k === 123;
+
+                const ctrlShiftBlock = ctrl && shift && (
+                    key === 'i' || k === 73 ||
+                    key === 'j' || k === 74 ||
+                    key === 'c' || k === 67 ||
+                    key === 'k' || k === 75 ||
+                    key === 'e' || k === 69 ||
+                    key === 'm' || k === 77 ||
+                    key === 'p' || k === 80 ||
+                    key === 'o' || k === 79 ||
+                    key === 'f' || k === 70 ||
+                    key === 'd' || k === 68 ||
+                    key === 'l' || k === 76 ||
+                    key === 'q' || k === 81
+                );
+
+                const ctrlBlock = ctrl && !shift && (
+                    key === 'u' || k === 85
+                );
+
+                if (fKeyBlock || ctrlShiftBlock || ctrlBlock) {
                     e.preventDefault();
+                    e.stopPropagation();
                     return false;
                 }
-            });
+            }, true);
 
-            // Sử dụng debugger liên tục để đóng băng khi DevTools được mở
-            const threshold = 100;
-            setInterval(function () {
-                const start = performance.now();
-                debugger;
-                const end = performance.now();
-                if (end - start > threshold) {
-                    document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;font-size:18px;font-weight:bold;color:#ff3333;text-align:center;padding:20px;">Vui lòng tắt Developer Tools để tiếp tục sử dụng trang web!</div>';
-                }
-            }, 500);
+            document.addEventListener('contextmenu', function (e) {
+                if (_devUnlocked) return;
+                e.preventDefault();
+            });
         })();
+
+        // ── Phát hiện thiết bị: kết hợp 3 tín hiệu ──
+        (function detectDevice() {
+            // ★ Escape hatch: thêm ?preview vào URL để test từ máy tính
+            if (new URLSearchParams(location.search).has('preview')) return;
+
+            // Tín hiệu 1: User Agent — điện thoại thật & Chrome DevTools đều giả lập đúng
+            const mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            // Tín hiệu 2: Touch — Chrome DevTools bật Touch simulation → maxTouchPoints = 5
+            const hasTouch = navigator.maxTouchPoints > 0;
+
+            // Tín hiệu 3: screen.width vật lý — không đổi khi resize cửa sổ
+            const smallScreen = screen.width < 768;
+
+            // Mobile nếu có UA mobile  HOẶC  (màn hình nhỏ VÀ có touch)
+            const isMobile = mobileUA || (smallScreen && hasTouch);
+
+            if (!isMobile) {
+                document.body.classList.add('is-desktop');
+            }
+        })();
+
+
 
         const pages = Array.from(document.querySelectorAll('.app .page'));
 
@@ -1297,107 +1218,7 @@
         let countdownInterval = null;
         let remainingTime = 0;
 
-        // Render QR Code on PC Warning View
-        window.addEventListener('DOMContentLoaded', () => {
-            if (typeof QRCode !== 'undefined') {
-                new QRCode(document.getElementById("qrcode-desktop"), {
-                    text: "huynhtu_wordpress_tutorial",
-                    width: 150,
-                    height: 150,
-                    colorDark: "#1C1917",
-                    colorLight: "#FFFFFF",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-            }
-        });
 
-        // Interactive Camera scanning code functions
-        let activeScannerInstance = null;
-
-        function startScanning(branch) {
-            const readerId = `reader-${branch}`;
-            const scanBtn = document.getElementById(`btn-scan-${branch}`);
-            const manualDiv = document.querySelector(`#unlock-${branch} .manual-unlock`);
-            const readerDiv = document.getElementById(readerId);
-
-            scanBtn.style.display = 'none';
-            if (manualDiv) manualDiv.style.display = 'none';
-            readerDiv.style.display = 'block';
-
-            if (activeScannerInstance) {
-                activeScannerInstance.clear();
-            }
-
-            activeScannerInstance = new Html5Qrcode(readerId);
-
-            const config = {
-                fps: 10,
-                qrbox: { width: 200, height: 200 }
-            };
-
-            activeScannerInstance.start(
-                { facingMode: "environment" },
-                config,
-                (decodedText) => {
-                    activeScannerInstance.stop().then(() => {
-                        readerDiv.style.display = 'none';
-                        scanBtn.style.display = 'inline-block';
-                        if (manualDiv) manualDiv.style.display = 'block';
-                        activeScannerInstance = null;
-
-                        const text = decodedText.trim();
-                        if (text === 'huynhtu_wordpress_tutorial' || text === `${branch}_video` || text === branch) {
-                            unlockContent(branch);
-                        } else {
-                            alert(`Mã QR không khớp với tài liệu này! Vui lòng quét đúng mã QR Hướng dẫn trên màn hình máy tính.`);
-                        }
-                    }).catch(err => {
-                        console.error(err);
-                        unlockContent(branch); // Fallback unlock
-                    });
-                },
-                (errorMessage) => {
-                    // Quiet scanning error handler
-                }
-            ).catch(err => {
-                console.error("Camera start failed: ", err);
-                alert("Không thể kết nối máy ảnh. Vui lòng thử lại, cấp quyền máy ảnh, hoặc nhập mã tay.");
-                scanBtn.style.display = 'inline-block';
-                if (manualDiv) manualDiv.style.display = 'block';
-                readerDiv.style.display = 'none';
-            });
-        }
-
-        function manualUnlock(branch) {
-            const input = document.getElementById(`code-input-${branch}`);
-            const val = input.value.trim().toLowerCase();
-            if (val === 'huynhtu_wordpress_tutorial' || val === branch || val === `${branch}_video` || val === 'teacher' || val === '123456') {
-                unlockContent(branch);
-            } else {
-                alert("Mã mở khóa sai! Vui lòng nhập lại.");
-            }
-        }
-
-        function unlockContent(branch) {
-            localStorage.setItem(`unlocked_${branch}`, 'true');
-            checkUnlocks();
-        }
-
-        function checkUnlocks() {
-            ['de1', 'de2'].forEach(branch => {
-                const isUnlocked = localStorage.getItem(`unlocked_${branch}`) === 'true';
-                const unlockWrapper = document.getElementById(`unlock-${branch}`);
-                const actualContent = document.getElementById(`content-${branch}`);
-
-                if (isUnlocked) {
-                    if (unlockWrapper) unlockWrapper.style.display = 'none';
-                    if (actualContent) actualContent.style.display = 'block';
-                } else {
-                    if (unlockWrapper) unlockWrapper.style.display = 'block';
-                    if (actualContent) actualContent.style.display = 'none';
-                }
-            });
-        }
 
         function selectBranch(branchName) {
             selectedBranch = branchName;
@@ -1409,6 +1230,78 @@
             handleMove(1);
         }
 
+        function isScrolledToBottom() {
+            const currentPage = pages[currentIdx];
+            if (!currentPage) return true;
+
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight;
+            const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+
+            // Ratio check: user has scrolled past 85% of total scrollable area
+            const scrollRatio = (scrollTop + clientHeight) / scrollHeight;
+            if (scrollRatio >= 0.85) return true;
+
+            // Absolute distance check: within 120px from bottom (handles dynamic toolbars/address bar offsets)
+            if (scrollHeight - (scrollTop + clientHeight) <= 120) return true;
+
+            // Viewport rect check: if page bottom is close to viewport bottom
+            const rect = currentPage.getBoundingClientRect();
+            if (rect.bottom <= clientHeight + 50) return true;
+
+            // Small/non-scrollable page check
+            if (scrollHeight <= clientHeight + 10) return true;
+
+            return false;
+        }
+
+        function updateButtonState() {
+            const btnNext = document.getElementById('btn-next');
+            if (!btnNext) return;
+
+            const currentPage = pages[currentIdx];
+            const isLastPage = (currentIdx === pages.length - 1);
+
+            // 1. Branch selection check
+            if (currentPage.id === 'pg-7' && !selectedBranch) {
+                btnNext.disabled = true;
+                btnNext.textContent = isLastPage ? 'Hoàn thành' : 'Tiếp tục →';
+                return;
+            }
+
+            // 2. Countdown timer check
+            let timerRequired = false;
+            let timerDone = true;
+            if (currentPage.getAttribute('data-countdown') === 'true') {
+                timerRequired = true;
+                timerDone = localStorage.getItem(`wp_timer_done_${currentPage.id}`) === 'true';
+            }
+
+            // 3. Scroll check (dynamic scroll validation)
+            let scrollDone = isScrolledToBottom();
+
+            const isTimerBlocking = timerRequired && !timerDone;
+            const isScrollBlocking = !scrollDone;
+
+            if (isTimerBlocking || isScrollBlocking) {
+                btnNext.disabled = true;
+            } else {
+                btnNext.disabled = false;
+            }
+
+            if (isTimerBlocking && remainingTime > 0) {
+                updateTimerText(btnNext, remainingTime);
+            } else if (isScrollBlocking) {
+                btnNext.textContent = 'Tiếp tục';
+            } else {
+                btnNext.textContent = isLastPage ? 'Hoàn thành' : 'Tiếp tục';
+            }
+        }
+
+        function handleScroll() {
+            updateButtonState();
+        }
+
         function renderActivePage() {
             pages.forEach((page, idx) => {
                 page.classList.toggle('active', idx === currentIdx);
@@ -1416,24 +1309,12 @@
 
             document.getElementById('btn-prev').disabled = (currentIdx === 0);
 
-            const isLastPage = (currentIdx === pages.length - 1);
-            const btnNext = document.getElementById('btn-next');
-            btnNext.textContent = isLastPage ? 'Hoàn thành' : 'Tiếp tục →';
-            btnNext.disabled = false;
-
-            if (pages[currentIdx].id === 'pg-7' && !selectedBranch) {
-                btnNext.disabled = true;
-            } else {
-                btnNext.disabled = false;
-            }
-
             if (document.getElementById('opt-de1') && document.getElementById('opt-de2')) {
                 document.getElementById('opt-de1').classList.toggle('selected', selectedBranch === 'de1');
                 document.getElementById('opt-de2').classList.toggle('selected', selectedBranch === 'de2');
             }
 
-            // Perform QR content unlock verification checks
-            checkUnlocks();
+
 
             // Handle slide countdown timers
             clearInterval(countdownInterval);
@@ -1452,8 +1333,7 @@
                     }
 
                     if (remainingTime > 0) {
-                        btnNext.disabled = true;
-                        updateTimerText(btnNext, remainingTime);
+                        updateButtonState();
 
                         countdownInterval = setInterval(() => {
                             remainingTime--;
@@ -1461,17 +1341,16 @@
 
                             if (remainingTime <= 0) {
                                 clearInterval(countdownInterval);
-                                btnNext.disabled = false;
-                                btnNext.textContent = isLastPage ? 'Hoàn thành' : 'Tiếp tục →';
                                 localStorage.setItem(`wp_timer_done_${currentPage.id}`, 'true');
                                 localStorage.removeItem(`wp_remaining_time_${currentPage.id}`);
-                            } else {
-                                updateTimerText(btnNext, remainingTime);
                             }
+                            updateButtonState();
                         }, 1000);
                     }
                 }
             }
+
+            updateButtonState();
         }
 
         function updateTimerText(buttonEl, timeInSeconds) {
@@ -1489,14 +1368,6 @@
             }
 
             let nextIdx = currentIdx + direction;
-
-            // Stop scanner if active when moving away
-            if (activeScannerInstance) {
-                try {
-                    activeScannerInstance.stop();
-                    activeScannerInstance = null;
-                } catch (e) { }
-            }
 
             while (nextIdx >= 0 && nextIdx < pages.length) {
                 const nextPage = pages[nextIdx];
@@ -1530,6 +1401,15 @@
 
         // Initialize displays
         renderActivePage();
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
+
+        // Re-evaluate button state whenever any image loads (helps with dynamic height changes)
+        window.addEventListener('load', handleScroll);
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', handleScroll);
+        });
     </script>
 </body>
 
